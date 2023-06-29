@@ -2,8 +2,14 @@
 
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-<link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css"/>
-<link rel="stylesheet" href="file:///Users/owner/Documents/HTML/Snippets/progress-bar.css"/>
+<link
+  rel="stylesheet"
+  href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css"
+/>
+<link
+  rel="stylesheet"
+  href="file:///Users/owner/Documents/HTML/Snippets/progress-bar.css"
+/>
 
 <style>
   button {
@@ -20,7 +26,8 @@
     margin-top: 10px;
   }
   #newb,
-  #addb, .greenb {
+  #addb,
+  .greenb {
     background: linear-gradient(green, darkgreen);
     color: lightgray;
   }
@@ -45,7 +52,7 @@
     border: 1px solid #8d99e7;
     border-width: 1px 0px;
   }
-  input[type=search] {
+  input[type="search"] {
     height: 35px;
     border-radius: 15px;
     padding: 0 13px;
@@ -59,13 +66,16 @@
   table.dataTable.display tbody tr.odd {
     background-color: #ecf6ff;
   }
-  table.dataTable.display tbody tr.odd>.sorting_1, table.dataTable.order-column.stripe tbody tr.odd>.sorting_1 {
+  table.dataTable.display tbody tr.odd > .sorting_1,
+  table.dataTable.order-column.stripe tbody tr.odd > .sorting_1 {
     background-color: #d9ecfd;
   }
-  table.dataTable.display tbody tr.even>.sorting_1, table.dataTable.order-column.stripe tbody tr.even>.sorting_1 {
+  table.dataTable.display tbody tr.even > .sorting_1,
+  table.dataTable.order-column.stripe tbody tr.even > .sorting_1 {
     background-color: #f5faff;
   }
-  table.dataTable.hover tbody tr:hover, table.dataTable.display tbody tr:hover {
+  table.dataTable.hover tbody tr:hover,
+  table.dataTable.display tbody tr:hover {
     background-color: #bdbee7;
   }
   table td:nth-child(1) {
@@ -76,7 +86,8 @@
     color: rgb(2, 0, 130);
     font-family: sans-serif;
   }
-  table td:nth-child(3), table td:nth-child(6) {
+  table td:nth-child(3),
+  table td:nth-child(6) {
     text-align: center;
   }
   .poops {
@@ -106,7 +117,8 @@
     background: white;
     display: inline-block;
   }
-  #new-entry, #edit-entry {
+  #new-entry,
+  #edit-entry {
     border: 1px solid lightgray;
     display: inline-block;
     padding: 20px 40px;
@@ -133,7 +145,10 @@
   }
 
   @media (max-width: 600px) {
-    #new-entry, #edit-entry {width: 80%;}
+    #new-entry,
+    #edit-entry {
+      width: 80%;
+    }
   }
 </style>
 
@@ -148,25 +163,31 @@
 <br />
 
 <div class="hideme" id="logs">
-  <div class="box" style="padding-bottom: 50px;">
+  <div class="box" style="padding-bottom: 50px">
     <p style="color: darkgreen"><b>Print / Export Log</b></p>
     <p><textarea id="savet" rows="8" cols="50"></textarea></p>
     <p style="font-size: small; color: gray">
       Copy and paste to your favorite email or text program. Save, Print or
       Share.
     </p>
-    <button id="copyl">Copy Log</button> <button class="greenb" onclick="saveTXT('#savet', 'mylog')">Save Log</button>
+    <button id="copyl">Copy Log</button>
+    <button class="greenb" onclick="saveTXT('#savet', 'mylog')">
+      Save Log
+    </button>
 
-    <hr style="margin-top: 20px;" />
+    <hr style="margin-top: 20px" />
 
-    <p style="color: darkblue;margin-top: 30px;"><b>Save Backup</b></p>
+    <p style="color: darkblue; margin-top: 30px"><b>Save Backup</b></p>
     <p><textarea id="saved" rows="4" cols="50"></textarea></p>
     <p style="font-size: small; color: gray">
       Backup your log or export it to a different computer.<br />
       Send it to yourself, then paste it into the 'Load Data' feature on a new
       computer.
     </p>
-    <button id="copyd">Copy Data</button> <button class="greenb" onclick="saveTXT('#saved', 'mydata')">Save Data</button>
+    <button id="copyd">Copy Data</button>
+    <button class="greenb" onclick="saveTXT('#saved', 'mydata')">
+      Save Data
+    </button>
   </div>
 </div>
 
@@ -175,13 +196,16 @@
     <p><b>Welcome</b></p>
     <p>A little background before we begin.</p>
     <ul style="text-align: left">
-      <li>Your data is completely private since it is not saved to any servers.</li>
       <li>
-        Any data you provide will be saved only on your browser, and will be available even if you close and restart.
+        Your data is completely private since it is not saved to any servers.
       </li>
       <li>
-        However, this means if you use a different browser or computer, you will start a
-        new log for each device.
+        Any data you provide will be saved only on your browser, and will be
+        available even if you close and restart.
+      </li>
+      <li>
+        However, this means if you use a different browser or computer, you will
+        start a new log for each device.
       </li>
       <li>
         Be sure you start your log on the device you plan to use regularly (such
@@ -201,13 +225,13 @@
     <p><b>Insert Data</b></p>
     <textarea id="loadd" rows="4" cols="50"></textarea>
     <p style="font-size: small; color: gray">
-        Warning: this will replace the current data (if any). There is no undo.
-      </p>
+      Warning: this will replace the current data (if any). There is no undo.
+    </p>
     <button id="setb">Set</button>
   </div>
 </div>
 
-<div class="hideme" id="new">
+<!-- <div class="hideme" id="new">
   <div id="new-entry">
     <p><b>New Entry</b></p>
     <hr />
@@ -243,13 +267,17 @@
       <button id="cancelb">Cancel</button> <button id="addb">Add</button>
     </p>
   </div>
-</div>
+</div> -->
 
 <div class="hideme" id="edit">
   <div id="edit-entry">
     <p class="entry">
       Edit Comments
-      <br /><textarea style="height: 80px;" id="edit-comment" placeholder="How did you feel today? Did you notice anything off?"></textarea>
+      <br /><textarea
+        style="height: 80px"
+        id="edit-comment"
+        placeholder="How did you feel today? Did you notice anything off?"
+      ></textarea>
     </p>
     <p style="margin-top: 30px">
       <button id="editb">Done</button>
@@ -289,45 +317,51 @@
   ];
   var columnRenderF = [
     {
-        render: function (data, type, row) {
-          if (type == "sort"){
-            return new Date(data).getTime();
-          }
-          return new Date(data).toLocaleString();
-        },
-        width: "200px",
-        targets: 0,
+      render: function (data, type, row) {
+        if (type == "sort") {
+          return new Date(data).getTime();
+        }
+        return new Date(data).toLocaleString();
+      },
+      width: "200px",
+      targets: 0,
     },
     {
-        render: function (data, type, row) {
-          return '<progress value="' + data + '" max="10" />';
-        },
-        width: "200px",
-        targets: 1,
+      render: function (data, type, row) {
+        return '<progress value="' + data + '" max="10" />';
+      },
+      width: "200px",
+      targets: 1,
     },
     {
-        render: function (data, type, row) {
-          return (data ? '&#128308;<span class="hidden">period</span>' : '&#128309;');
-        },
-        width: "80px",
-        targets: 2,
+      render: function (data, type, row) {
+        return data
+          ? '&#128308;<span class="hidden">period</span>'
+          : "&#128309;";
+      },
+      width: "80px",
+      targets: 2,
     },
     {
-        render: function (data, type, row) {
-          return '<span class="poops" style="background:' + data + '"></span>';
-        },
-        width: "80px",
-        targets: 3,
+      render: function (data, type, row) {
+        return '<span class="poops" style="background:' + data + '"></span>';
+      },
+      width: "80px",
+      targets: 3,
     },
     {
-        render: function (data, type, full, meta) {
-          return '<a class="edit icon" data="' + meta.row + '"">&#128395;</span>' + meta.row;
-        },
-        width: "30px",
-        targets: 5,
+      render: function (data, type, full, meta) {
+        return (
+          '<a class="edit icon" data="' +
+          meta.row +
+          '"">&#128395;</span>' +
+          meta.row
+        );
+      },
+      width: "30px",
+      targets: 5,
     },
   ];
-  
 
   //setup
   dataSet = JSON.parse(localStorage.getItem("foodLog"));
@@ -337,21 +371,25 @@
 
   //table functions
   function init() {
-    $('#mytable').off();
+    $("#mytable").off();
     $("#mytable").DataTable({
       language: {
-        emptyTable: "<p style='margin:10px'>This is the beginning of your log.</p><p id='first'>Add your first entry to get started!</p>"
+        emptyTable:
+          "<p style='margin:10px'>This is the beginning of your log.</p><p id='first'>Add your first entry to get started!</p>",
       },
       order: [[0, "desc"]],
       pageLength: 30,
-      lengthMenu: [ [10, 30, 50, -1], [10, 30, 50, "All"] ],
+      lengthMenu: [
+        [10, 30, 50, -1],
+        [10, 30, 50, "All"],
+      ],
       data: dataSet,
       columns: columnsF,
       columnDefs: columnRenderF,
     });
     runFields(dataSet);
   }
-  function formRow(){
+  function formRow() {
     let row = [];
     function checkVal(v) {
       if (v.length < 1) v = "--";
@@ -359,12 +397,12 @@
     }
     var time = new Date();
     var zone = time.getTimezoneOffset() / 60;
-    var date = new Date($("#date").val() + 'T00:00:00.000-0' + zone + ':00');
+    var date = new Date($("#date").val() + "T00:00:00.000-0" + zone + ":00");
     date.setHours(time.getHours(), time.getMinutes(), time.getSeconds());
     row.push(
       date,
       $("#energy").val(),
-      $("#period").is(':checked'),
+      $("#period").is(":checked"),
       $("#poop").val(),
       checkVal($("#comment").val())
     );
@@ -381,7 +419,7 @@
       );
     }
   }
-  function reset(){
+  function reset() {
     if (confirm("Are you sure you want to reset ALL your data?")) {
       localStorage.removeItem("foodLog");
       location.reload();
@@ -401,15 +439,14 @@
     copyTextarea.focus();
     copyTextarea.select();
     try {
-      var successful = document.execCommand('copy');
-      if (successful) alert(
-        "Text copied to clipboard. Send it to yourself, then paste it into the 'Load Data' feature on a new computer."
-      );
-      else alert(
-        "Not supported in this browser."
-      );
+      var successful = document.execCommand("copy");
+      if (successful)
+        alert(
+          "Text copied to clipboard. Send it to yourself, then paste it into the 'Load Data' feature on a new computer."
+        );
+      else alert("Not supported in this browser.");
     } catch (err) {
-      console.log('Oops, unable to copy');
+      console.log("Oops, unable to copy");
       console.log(err);
     }
   }
@@ -419,18 +456,17 @@
     $.each(data, function () {
       var t = $("#savet").text();
       let date = this[0];
-      let energy = this[1]
+      let energy = this[1];
       $("#savet").text(
         t +
-          (this[2]
-            ? $('#red_dot').text()
-            : $('#white_dot').text()
-          ) +
+          (this[2] ? $("#red_dot").text() : $("#white_dot").text()) +
           new Date(date).toLocaleDateString() +
           "\n  Comments: " +
           this[4] +
           "\n  Energy: " +
-          energy + (energy == 10 ? ' ' : '  ') + $('#health_bar').text().repeat(energy) +
+          energy +
+          (energy == 10 ? " " : "  ") +
+          $("#health_bar").text().repeat(energy) +
           "\n\n"
       );
     });
@@ -450,46 +486,49 @@
     })
     .children()
     .click(function (e) {
-        e.stopPropagation();
+      e.stopPropagation();
     });
   $("#setb").click(function () {
-      newData = "";
-      try {
-        newData = JSON.parse($("#loadd").val());
-      } catch {
-        alert("This data is not compatible.");
-      }
-      if (newData.length && confirm("Are you sure you want to replace all data?")) {
-        dataLoad = newData;
-        save();
-        $(".hideme").fadeOut();
-        $("#mytable").DataTable().destroy();
-        init();
-      }
-  });
-  $("#addb").click(function () {
-      temp = formRow();
-      if (Array.isArray(dataSet)) dataLoad = Array.from(dataSet);
-      dataLoad.push(temp);
+    newData = "";
+    try {
+      newData = JSON.parse($("#loadd").val());
+    } catch {
+      alert("This data is not compatible.");
+    }
+    if (
+      newData.length &&
+      confirm("Are you sure you want to replace all data?")
+    ) {
+      dataLoad = newData;
       save();
       $(".hideme").fadeOut();
       $("#mytable").DataTable().destroy();
       init();
+    }
   });
-  $("#mytable tbody").on('click', '.edit', function () {
-    rowNum = parseInt($(this).attr('data'));
+  $("#addb").click(function () {
+    temp = formRow();
+    if (Array.isArray(dataSet)) dataLoad = Array.from(dataSet);
+    dataLoad.push(temp);
+    save();
+    $(".hideme").fadeOut();
+    $("#mytable").DataTable().destroy();
+    init();
+  });
+  $("#mytable tbody").on("click", ".edit", function () {
+    rowNum = parseInt($(this).attr("data"));
     row = dataSet[rowNum];
-    $('#edit-comment').val(row[4]);
+    $("#edit-comment").val(row[4]);
     $("#edit").show();
   });
   $("#editb").click(function () {
-      row[4] = $('#edit-comment').val();
-      if (Array.isArray(dataSet)) dataLoad = Array.from(dataSet);
-      dataLoad[rowNum] = row;
-      save();
-      $(".hideme").fadeOut();
-      $("#mytable").DataTable().destroy();
-      init();
+    row[4] = $("#edit-comment").val();
+    if (Array.isArray(dataSet)) dataLoad = Array.from(dataSet);
+    dataLoad[rowNum] = row;
+    save();
+    $(".hideme").fadeOut();
+    $("#mytable").DataTable().destroy();
+    init();
   });
   $("#saveb").click(function () {
     $("#logs").show();
@@ -506,7 +545,7 @@
     copyTXT("#saved");
   });
   // $("body").on('click', '.edit', function() {
-  //     if ($(this).find('textarea').length < 1) 
+  //     if ($(this).find('textarea').length < 1)
   //       $(this).wrapInner("<textarea/>").find('textarea').focus();
   //     else return;
   // }).delegate('.edit textarea', 'blur', function() {
@@ -515,8 +554,8 @@
 
   //handle table errors
   $.fn.dataTable.ext.errMode = "none";
-  var table = $('#mytable').DataTable();
-  $('#mytable')
+  var table = $("#mytable").DataTable();
+  $("#mytable")
     .on("error.dt", function (e, settings, techNote, message) {
       console.log("An error has been reported by DataTables: ", message);
     })
