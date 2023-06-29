@@ -1,16 +1,15 @@
 <html>
   <head>
-    <meta name="title" content="Recipe Log - Shalom R" />
-    <meta name="description" content="Free Web tutorials" />
+    <meta name="title" content="Recipe Cleaner - by Shalom The Great" />
+    <meta
+      name="description"
+      content="Save your favorite online recipe, WITH your custom edits. Format recipes for printing, without the ads and the clutter. Save recipes to your computer for offline viewing."
+    />
     <meta
       name="keywords"
-      content="Recipe Maker, Recipe Printer, Download Recipe, Recipe Cleaner, Format Recipe, Recipe Formatter, Print Your Own Recipe"
+      content="Recipe Maker, Recipe Printer, Download Recipe, Recipe Cleaner, Format Recipe, Recipe Formatter, Print Your Own Recipe, Recipe Editor"
     />
     <meta name="author" content="Shalom Rasmussen" />
-    <link
-      rel="stylesheet"
-      href="https://duplimark.com/Content/UI/normalize.css"
-    />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.css"
@@ -20,7 +19,7 @@
       href="https://fonts.googleapis.com/css?family=Martel+Sans|Molle:400i|Raleway|Dancing+Script|Roboto&display=swap"
     />
     <style>
-      /* v1.0 */
+      /* v1.4 */
       html {
         padding-top: 30px;
       }
@@ -57,21 +56,26 @@
       #instructions {
         list-style-type: none;
         counter-reset: item;
+        margin-bottom: 3rem;
+      }
+      li {
+        margin-bottom: 2rem;
+        padding-left: 50px;
+        position: relative;
       }
       #instructions li:before {
         counter-increment: item;
         content: counter(item);
-        margin-right: 15px;
-        padding: 3px 10px 0px 10px;
+        padding: 3px 10px 1px 10px;
         font-size: large;
-        font-weight: bold;
-        display: inline-block;
+        font-weight: 700;
         border-radius: 50%;
-        border: 1px solid #666;
+        border: 1px solid #999;
         color: #666;
-        float: left;
-        position: relative;
-        top: -4px;
+        position: absolute;
+        top: calc(50% - 18px);
+        left: 0px;
+        line-height: 25px;
       }
       #instructions li:after {
         content: " ";
@@ -93,6 +97,12 @@
         border: 1px solid orange;
         border-radius: 3px;
       }
+      .modify {
+        font-size: small;
+        margin-left: 30px;
+        color: #e0b282;
+        cursor: pointer;
+      }
       #credit {
         font-size: small;
         color: #666;
@@ -109,7 +119,7 @@
       @media print {
         body,
         #instructions li:before {
-          font-size: 90%;
+          font-size: 110%;
         }
         #credits {
           font-size: 80%;
@@ -119,18 +129,20 @@
         }
       }
       @media print {
-        #instructions li:before {
-          padding: 3px 6px 0px 7px;
-        }
-        #save,
-        #dload {
+        #actions,
+        .modify {
           display: none;
         }
       }
       @media print {
         #credit {
           position: fixed;
-          bottom: 0;
+          bottom: 30px;
+        }
+        .mtitle {
+          color: #dc975b;
+          -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
         }
       }
     </style>
@@ -138,7 +150,7 @@
   <body>
     <div class="container">
       <div class="row">
-        <span style="float: right">
+        <span id="actions" style="float: right">
           <button id="save" onclick="presave();">Save</button>
           <span id="dload" style="display: none">
             <input type="text" id="dname" placeholder="File Name" />
@@ -157,7 +169,7 @@
           <span id="prep" class="edit">40 mins</span>
         </div>
         <div class="three columns">
-          <span class="mtitle">Bake</span>
+          <span class="mtitle edit">Bake</span>
           <span id="bake" class="edit">1 hr</span>
         </div>
         <div class="three columns">
@@ -171,9 +183,12 @@
       </div>
       <hr />
       <div class="row" style="margin: 0 25px; margin-top: 40px">
-        <div class="five columns">
-          <h5>Ingredients</h5>
-          <p class="mtitle">Wet</p>
+        <div id="items" class="five columns">
+          <h5>
+            Ingredients
+            <span class="modify" onclick="addSection()">+ add section</span>
+          </h5>
+          <p class="mtitle edit">Wet</p>
           <div class="set">
             <div class="text"></div>
             <textarea class="field">
@@ -181,7 +196,7 @@
             >
             <button type="button">wet ingredients</button>
           </div>
-          <p class="mtitle" style="margin-top: 25px">Dry</p>
+          <p class="mtitle edit" style="margin-top: 25px">Dry</p>
           <div class="set">
             <div class="text"></div>
             <textarea class="field">2 cups almond flour</textarea>
@@ -189,7 +204,12 @@
           </div>
         </div>
         <div class="seven columns">
-          <h5>Instructions</h5>
+          <h5>
+            Instructions
+            <span id="noteb" class="modify" onclick="addNote()"
+              >+ add note</span
+            >
+          </h5>
           <div class="set">
             <ol class="text" id="instructions">
               <li>Preheat oven to 350&#176;</li>
@@ -197,6 +217,10 @@
               <li>Bake for 30 mins</li>
             </ol>
             <textarea class="field">Preheat oven to 350&#176;</textarea>
+          </div>
+          <div id="note" class="set" style="display: none">
+            <p class="text">NOTE: Important info here...</p>
+            <textarea class="field">NOTE: </textarea>
           </div>
           <div class="set" style="font-size: small; color: #999">
             <div class="text" id="credits">
@@ -212,7 +236,7 @@
 
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <script>
-      // v1.0
+      // v1.3
       $(document)
         .on("click", ".set button, .text", function () {
           $(this).siblings(".field").show().focus();
@@ -230,19 +254,36 @@
           });
           $(this).prev(".text").html(text).show();
         });
-      $(".edit")
-        .click(function () {
+      $("body")
+        .on("click", ".edit", function () {
           if ($(this).find("textarea").length < 1)
             $(this).wrapInner("<textarea/>").find("textarea").focus();
           else return;
         })
-        .delegate("textarea", "blur", function () {
+        .delegate(".edit textarea", "blur", function () {
           $(this).parent().text(this.value);
         });
       function presave() {
         $("#save").hide();
         $("#dload").show();
         $("#dname").val($("h3").text().replace(/\s/g, "")).focus();
+      }
+      function addSection() {
+        if (
+          $("#items .mtitle").length >= 4 &&
+          !confirm("Are you sure you want to add another section?")
+        )
+          return;
+        $("#items")
+          .append(`<p class="mtitle edit" style="margin-top:25px;">Seasonings</p>
+                    <div class="set">
+                        <div class="text"></div>
+                        <textarea class="field">1t Salt</textarea>
+                        <button type="button">dry ingredients</button>
+                    </div>`);
+      }
+      function addNote() {
+        $("#note").toggle();
       }
       function saveme(name) {
         if (name.trim() == "") name = $("h3").text().replace(/\s/g, "");
