@@ -1,0 +1,261 @@
+<html>
+  <head>
+    <meta name="title" content="Recipe Log - Shalom R" />
+    <meta name="description" content="Free Web tutorials" />
+    <meta
+      name="keywords"
+      content="Recipe Maker, Recipe Printer, Download Recipe, Recipe Cleaner, Format Recipe, Recipe Formatter, Print Your Own Recipe"
+    />
+    <meta name="author" content="Shalom Rasmussen" />
+    <link
+      rel="stylesheet"
+      href="https://duplimark.com/Content/UI/normalize.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Martel+Sans|Molle:400i|Raleway|Dancing+Script|Roboto&display=swap"
+    />
+    <style>
+      /* v1.0 */
+      html {
+        padding-top: 30px;
+      }
+      .fstandard {
+        font-family: "Raleway", sans-serif;
+      }
+      .fdancing {
+        font-family: "Dancing Script", cursive;
+      }
+      body {
+        font-family: "Martel Sans", sans-serif;
+      }
+      .mtitle {
+        text-transform: uppercase;
+        color: #888;
+        font-size: smaller;
+        margin-right: 10px;
+      }
+      #dload button {
+        background: linear-gradient(blue, darkblue);
+        border-radius: 5px;
+        color: lightblue;
+      }
+      #save {
+        background: linear-gradient(green, darkgreen);
+        color: lightgray;
+      }
+      hr {
+        margin: 2.5rem 0;
+      }
+      .text p {
+        margin-bottom: 15px;
+      }
+      #instructions {
+        list-style-type: none;
+        counter-reset: item;
+      }
+      #instructions li:before {
+        counter-increment: item;
+        content: counter(item);
+        margin-right: 15px;
+        padding: 3px 10px 0px 10px;
+        font-size: large;
+        font-weight: bold;
+        display: inline-block;
+        border-radius: 50%;
+        border: 1px solid #666;
+        color: #666;
+        float: left;
+        position: relative;
+        top: -4px;
+      }
+      #instructions li:after {
+        content: " ";
+        display: block;
+        clear: both;
+      }
+      textarea {
+        min-height: 10px;
+      }
+      .seven textarea {
+        width: 100%;
+      }
+      .field {
+        display: none;
+        height: 100px;
+      }
+      .text:hover,
+      .edit:hover {
+        border: 1px solid orange;
+        border-radius: 3px;
+      }
+      #credit {
+        font-size: small;
+        color: #666;
+        margin-top: 40px;
+        float: right;
+      }
+      #credit:before {
+        content: "recipe by | ";
+      }
+      #credit:after {
+        content: "created at | recipe.DigitalCrayonDesign.com";
+        margin-left: 50px;
+      }
+      @media print {
+        body,
+        #instructions li:before {
+          font-size: 90%;
+        }
+        #credits {
+          font-size: 80%;
+        }
+        hr {
+          margin: 2rem;
+        }
+      }
+      @media print {
+        #instructions li:before {
+          padding: 3px 6px 0px 7px;
+        }
+        #save,
+        #dload {
+          display: none;
+        }
+      }
+      @media print {
+        #credit {
+          position: fixed;
+          bottom: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <span style="float: right">
+          <button id="save" onclick="presave();">Save</button>
+          <span id="dload" style="display: none">
+            <input type="text" id="dname" placeholder="File Name" />
+            <button onclick="saveme($('#dname').val())">Download</button>
+          </span>
+          <button id="print" onclick="window.print();return false;">
+            Print
+          </button>
+        </span>
+        <h3 class="fdancing edit">Recipe Title</h3>
+        <hr />
+      </div>
+      <div class="row" style="text-align: center">
+        <div class="three columns">
+          <span class="mtitle">Prep</span>
+          <span id="prep" class="edit">40 mins</span>
+        </div>
+        <div class="three columns">
+          <span class="mtitle">Bake</span>
+          <span id="bake" class="edit">1 hr</span>
+        </div>
+        <div class="three columns">
+          <span class="mtitle">Total</span>
+          <span id="total" class="edit">1 hr 40 mins</span>
+        </div>
+        <div class="three columns">
+          <span class="mtitle">Yield</span>
+          <span id="yield" class="edit">1 Pie</span>
+        </div>
+      </div>
+      <hr />
+      <div class="row" style="margin: 0 25px; margin-top: 40px">
+        <div class="five columns">
+          <h5>Ingredients</h5>
+          <p class="mtitle">Wet</p>
+          <div class="set">
+            <div class="text"></div>
+            <textarea class="field">
+1/2 cup milk &#013;2 tsp vanilla extract</textarea
+            >
+            <button type="button">wet ingredients</button>
+          </div>
+          <p class="mtitle" style="margin-top: 25px">Dry</p>
+          <div class="set">
+            <div class="text"></div>
+            <textarea class="field">2 cups almond flour</textarea>
+            <button type="button">dry ingredients</button>
+          </div>
+        </div>
+        <div class="seven columns">
+          <h5>Instructions</h5>
+          <div class="set">
+            <ol class="text" id="instructions">
+              <li>Preheat oven to 350&#176;</li>
+              <li>Mix wet ingredients</li>
+              <li>Bake for 30 mins</li>
+            </ol>
+            <textarea class="field">Preheat oven to 350&#176;</textarea>
+          </div>
+          <div class="set" style="font-size: small; color: #999">
+            <div class="text" id="credits">
+              Credits -
+              https://www.kingarthurflour.com/recipes/banana-bread-recipe
+            </div>
+            <textarea class="field">Credits - </textarea>
+          </div>
+        </div>
+      </div>
+      <span id="credit" class="edit">Shalom R</span>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script>
+      // v1.0
+      $(document)
+        .on("click", ".set button, .text", function () {
+          $(this).siblings(".field").show().focus();
+          $(this).parent().children("button, .text").hide();
+        })
+        .delegate("textarea", "blur", function () {
+          $(this).html($(this).val());
+          $(this).hide();
+          let lines = $(this).val().split("\n");
+          var text = "";
+          var isOL = $(this).siblings("ol").is(":hidden");
+          $.each(lines, function () {
+            if (isOL) text = text + "<li>" + this + "</li>";
+            else text = text + "<p>" + this + "</p>";
+          });
+          $(this).prev(".text").html(text).show();
+        });
+      $(".edit")
+        .click(function () {
+          if ($(this).find("textarea").length < 1)
+            $(this).wrapInner("<textarea/>").find("textarea").focus();
+          else return;
+        })
+        .delegate("textarea", "blur", function () {
+          $(this).parent().text(this.value);
+        });
+      function presave() {
+        $("#save").hide();
+        $("#dload").show();
+        $("#dname").val($("h3").text().replace(/\s/g, "")).focus();
+      }
+      function saveme(name) {
+        if (name.trim() == "") name = $("h3").text().replace(/\s/g, "");
+        if (name.trim() == "") name = "myrecipe";
+        var htmlContent = [$("html").html()];
+        var bl = new Blob(htmlContent, { type: "text/html" });
+        //window.save(bl, name + ".html");
+        var url = window.URL.createObjectURL(bl);
+        var a = document.createElement("a");
+        a.href = url;
+        a.download = name + ".html";
+        a.click();
+      }
+    </script>
+  </body>
+</html>
