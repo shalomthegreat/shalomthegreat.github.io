@@ -82,12 +82,14 @@
     color: indigo;
     font-family: sans-serif;
   }
-  table td:nth-child(5) {
+  table td:nth-child(6) {
     color: rgb(2, 0, 130);
     font-family: sans-serif;
   }
   table td:nth-child(3),
-  table td:nth-child(6) {
+  table td:nth-child(4),
+  table td:nth-child(5),
+  table td:nth-child(7) {
     text-align: center;
   }
   /* .ph {
@@ -244,7 +246,7 @@
         Energy <span id="energy-val" style="color: gray">(5)</span><br />
         <input
           id="energy"
-          style="width: 70%;"
+          style="width: 70%"
           type="range"
           min="0"
           max="10"
@@ -252,17 +254,39 @@
         />
       </p>
       <p class="entry">
-        PH Value <br />
-        <input id="phv" type="range" min="4.5" max="8" value="6" step="0.5" />
+        PH Level <span id="ph-val" style="color: gray">(6)</span><br />
+        <input
+          id="phv"
+          type="range"
+          min="4.5"
+          max="8"
+          value="6"
+          step="0.5"
+          onchange="$('#ph-val').html('('+$('#phv').val()+')')"
+        />
       </p>
       <p class="entry">
-        (Female) On Monthly Cycle <br />
-        <input id="period" type="radio" name="yesno" value="true">Yes</input>
-        <input type="radio" name="yesno" value="false" checked>No</input>
+        Menstruating <br />
+        <input id="period" type="radio" name="yesno" value="true" />
+        <label for="period">Yes</label>
+        <input id="nperiod" type="radio" name="yesno" value="false" checked />
+        <label for="nperiod">No</label>
+      </p>
+      <p class="entry">
+        Foods <br />
+        <textarea
+          style="height: 80px"
+          id="foods"
+          placeholder="What did you eat today? (Use simple keywords)"
+        ></textarea>
       </p>
       <p class="entry">
         Comments <br />
-        <textarea style="height: 80px;" id="comment" placeholder="How did you feel today? Did you notice anything off?"></textarea>
+        <textarea
+          style="height: 80px"
+          id="comment"
+          placeholder="How did you feel today?"
+        ></textarea>
       </p>
     </form>
     <hr />
@@ -306,7 +330,8 @@
     { title: "Date" },
     { title: "Energy" },
     { title: "Monthly Cycle" },
-    { title: "Stool" },
+    { title: "PH" },
+    { title: "Foods" },
     { title: "Comments" },
     { title: "Edit" },
   ];
@@ -314,7 +339,8 @@
     { title: "Date" },
     { title: "Energy" },
     { title: "--" },
-    { title: "Stool" },
+    { title: "PH" },
+    { title: "Foods" },
     { title: "Comments" },
     { title: "Edit" },
   ];
@@ -346,11 +372,12 @@
       targets: 2,
     },
     {
-      render: function (data, type, row) {
-        return '<span class="ph" style="background:' + data + '"></span>';
-      },
-      width: "80px",
+      width: "50px",
       targets: 3,
+    },
+    {
+      width: "120px",
+      targets: 4,
     },
     {
       render: function (data, type, full, meta) {
@@ -362,7 +389,7 @@
         );
       },
       width: "30px",
-      targets: 5,
+      targets: 6,
     },
   ];
 
@@ -407,6 +434,7 @@
       $("#energy").val(),
       $("#period").is(":checked"),
       $("#phv").val(),
+      $("#foods").val(),
       checkVal($("#comment").val())
     );
     return row;
@@ -415,6 +443,7 @@
     if (typeof Storage !== "undefined") {
       localStorage.setItem("foodLog", JSON.stringify(dataLoad));
       dataSet = dataLoad;
+      $("#foods").val(null);
       $("#comment").val(null);
     } else {
       alert(
@@ -464,8 +493,10 @@
         t +
           (this[2] ? $("#red_dot").text() : $("#white_dot").text()) +
           new Date(date).toLocaleDateString() +
-          "\n  Comments: " +
+          "\n  Foods: " +
           this[4] +
+          "\n  Comments: " +
+          this[5] +
           "\n  Energy: " +
           energy +
           (energy == 10 ? " " : "  ") +
