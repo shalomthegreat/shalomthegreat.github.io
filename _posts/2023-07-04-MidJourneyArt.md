@@ -1,6 +1,7 @@
 ---
 title: MidJourney Art
-date: 2023-06-28
+date: 2023-07-04
+
 categories: [WELCOME, AI-ART]
 tags: [showcase, art] # TAG names should always be lowercase
 ---
