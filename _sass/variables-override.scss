@@ -1,0 +1,11 @@
+/*
+  Appending custom SCSS variables will override the default ones in `_sass/addon/variables.scsss`
+*/
+
+@mixin dark-scheme {
+  @include dark-scheme-base;
+  /* Sidebar */
+  --sidebar-bg: radial-gradient(circle, #3a2c46 0%, #1d1f27 100%);
+  /* Posts */
+  --card-bg: #272331;
+}
