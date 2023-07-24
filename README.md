@@ -8,6 +8,9 @@ The project is pretty straight forward, edit the `_config.yml` for main settings
 
 - [writing a post](https://chirpy.cotes.page/posts/write-a-new-post/)
 - [running a local server](https://chirpy.cotes.page/posts/getting-started/#running-local-server): `bundle exec jekyll s`
+- Local Testing:
+  1. `bundle exec jekyll s`
+  2. `bundle exec htmlproofer _site --disable-external --check-html --allow_hash_href`
 
 # Credits
 
