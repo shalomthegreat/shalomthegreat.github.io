@@ -21,15 +21,15 @@ Encouraged by some good friends, I started learning programming languages. I sta
 
 # The adventure begins...
 
-In late 2017, I asked God to open doors for me to persue my passion. Without a degree, I wasn't sure what was possible, but God sent people to strengthen my faith that He would make a way.
+In late 2017, I asked God to open doors for me to pursue my passion. Without a degree, I wasn't sure what was possible, but God sent people to strengthen my faith that He would make a way.
 
-It wasn't long after when a family friend introduced me to his development team and business collegues. What started out as a website make-over ended in an opportunity to work for their [software company](https://duplimark.com) in early 2018.
+It wasn't long after when a family friend introduced me to his development team and business colleagues. What started out as a website make-over ended in an opportunity to work for their [software company](https://duplimark.com) in early 2018.
 
 During my time there, I was able to develop real-world experience with .NET and C# building web apps and mobile apps. I started out in UI/UX and eventually moved to team lead. By 2019 I was one of three devs who built a complete social media app in only three months.
 
 # Achievement unlocked...
 
-In 2021 I was among the first few devs hired at a blockchain and crypto incubator called BlockBot. Over the next two years, we grew from a handful of devs to over 150 employees. I had the privilege of helping 8 companies release their own crypto currency and mining software, becomming some of the first pioneers of community-driven, decentralized companies known as DAOs.
+In 2021 I was among the first few devs hired at a blockchain and crypto incubator called BlockBot. Over the next two years, we grew from a handful of devs to over 150 employees. I had the privilege of helping 8 companies release their own crypto currency and mining software, becoming some of the first pioneers of community-driven, decentralized companies known as DAOs.
 
 Check them out below:
 
