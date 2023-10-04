@@ -11,6 +11,7 @@ The project is pretty straight forward, edit the `_config.yml` for main settings
 - Local Testing:
   1. `bundle exec jekyll s`
   2. `bundle exec htmlproofer _site --disable-external --check-html --allow_hash_href`
+- Style overrides are found in [this file](_sass/variables-override.scss)
 
 # Credits
 
