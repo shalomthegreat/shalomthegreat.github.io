@@ -15,4 +15,4 @@ In my spare time, I like to create serverless mini-apps that can be easily trans
 
 ## Track your health
 
-- [Food Journal](/log.html)
+- [Allergy Journal](/log.html)
