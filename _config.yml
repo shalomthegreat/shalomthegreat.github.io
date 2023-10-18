@@ -38,7 +38,7 @@ social:
   # Change to your full name.
   # It will be displayed as the default author of the posts and the copyright owner in the Footer
   name: Shalom R.
-  email: srasmussen@nerdunited.com
+  email: connect@shalomr.dev
   links:
     # The first element serves as the copyright owner's link
     - https://github.com/shalomthegreat
@@ -70,7 +70,7 @@ google_analytics:
 #     light  - Use the light color scheme
 #     dark   - Use the dark color scheme
 #
-theme_mode: # [light|dark]
+theme_mode: dark
 
 # The CDN endpoint for images.
 # Notice that once it is assigned, the CDN url
@@ -80,7 +80,7 @@ theme_mode: # [light|dark]
 img_cdn:
 
 # the avatar on sidebar, support local or CORS resources
-avatar: https://ca.slack-edge.com/T030E5ELEGP-U035E84D6KT-1a402c7cfe7c-192
+avatar: https://media.discordapp.net/attachments/1059558297876836393/1154940491788472341/sumer.ai_anime_style_blue_hair_high_contrast_b72bedab-3527-4803-a598-e31f00f023af.png
 
 # boolean type, the global switch for TOC in posts.
 toc: true
