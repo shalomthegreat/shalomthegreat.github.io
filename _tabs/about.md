@@ -23,7 +23,7 @@ Encouraged by some good friends, I started learning programming languages. I beg
 
 In late 2017, I asked God to open doors for me to pursue my passion. It wasn't long after, a family friend introduced me to his development team and business colleagues. What started out as a website make-over ended in an opportunity to work for their [software company](https://duplimark.com) in early 2018.
 
-During my time there, I was able to develop real-world experience with .NET and C#, building applications for web and mobile. That was the fuel I needed to spark my passion. My reputation for quick and efficient work, bug-free code, and task management, landed me a lead role. By 2019, our team of three devs was so efficient we built a ground-up social media app for Android and iOS in only three months.
+During my time there, I was able to develop real-world experience with .NET and C#, building applications for web and mobile. My reputation for quick and efficient work, bug-free code, and efficient task management landed me a lead role. By 2019, our team of three devs was so efficient we built a ground-up social media app for Android and iOS in only three months.
 
 # Achievement unlocked...
 
