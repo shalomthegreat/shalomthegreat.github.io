@@ -1,0 +1,21 @@
+@import 'main';
+
+/* append your custom style below */
+
+@mixin dark-scheme {
+  @include dark-scheme-base;
+  --sidebar-bg: radial-gradient(circle, #3a2c46 0%, #1d1f27 100%);
+  --card-bg: #272331;
+  --sidebar-hover-bg: rgb(26 27 34 / 57%);
+  --card-header-bg: rgb(57 55 68);
+}
+
+@mixin light-scheme {
+  @include light-scheme-base;
+  // --sidebar-bg: #d2cee8;
+  --sidebar-bg: linear-gradient(to bottom, #f1f3ff 0%, #b9dafd 100%);
+  // --sidebar-hover-bg: rgb(223 224 241 / 65%);
+  --sidebar-hover-bg: rgb(255 255 255 / 65%);
+  --card-shadow: rgb(104 104 104 / 15%) 0 2px 6px 0,
+    rgba(211, 209, 209, 0.15) 0 0 0 1px;
+}
