@@ -17,21 +17,19 @@ Hi, I'm a software engineer who currently lives and works in the beautiful Salt 
 
 All throughout my teenage years (and even before), I was exploring the world of linux software, windows registry pranks, creating my own windows themes (shoutout to Windows Vista), upgrading my PC hardware, and building my own websites and small computer applications.
 
-Encouraged by some good friends, I started learning programming languages. I began with C and C++, but my path was derailed due to various family hardships. Collage wasn't an option for me, so I steered my time towards graphic design, video production, and web design (utilizing HTML5, JQuery, Angular, Node.js, and even custom frameworks).
+Encouraged by some good friends, I started learning programming languages. I began with C and C++ right after highschool, but my path was derailed due to family hardships. Collage wasn't an option for me, so I steered my time towards a freelancing business, providing local businesses with full-stack web & media solutions (utilizing HTML5, JQuery, Angular, and even custom frameworks).
 
 # The adventure begins...
 
-In late 2017, I asked God to open doors for me to pursue my passion. It wasn't long after, a family friend introduced me to his development team and business colleagues. What started out as a website make-over ended in an opportunity to work for their [software company](https://duplimark.com) in early 2018.
-
-During my time there, I was able to develop real-world experience with .NET and C#, building applications for web and mobile. My reputation for quick and efficient work, bug-free code, and efficient task management landed me a lead role. By 2019, our team of three devs was so efficient we built a ground-up social media app for Android and iOS in only three months.
+In late 2017, I asked God to open doors for me to pursue my true passion in software engineering. It wasn't long after, an opportunity opened up at a local startup. What began as a website re-skin ended up as an almost 4 year tenure, revamping and building new products from the ground up. My reputation for quick and efficient work, bug-free code, and efficient task management landed me a lead role. By 2019, our team of three devs was so efficient we built a ground-up social media app for Android and iOS in a record three months. Unfortunately, due to covid losses and rapid changes in the market, the company closed it's doors...
 
 # Achievement unlocked...
 
-In 2021 I was among the first few devs hired at a visionary blockchain and crypto incubator called BlockBot. Over the next two years, in spite of hardships in the economy, we grew from a handful of devs to over 200 employees. As the lead developer for their multi-platform mining software, I was in charge of architecting solutions to their crumbling auto-update system, essential for maintaining customer retention, and revamping the application to meet demand for a modern dashboard with analytics and reporting.
+In 2021 I was among the first few devs hired at a visionary blockchain and Web3 tech incubator called BlockBot. Over the next two years, we grew from a handful of devs to over 200 employees. As the lead developer for their multi-platform mining software, I was in charge of architecting solutions to the auto-update system, essential for maintaining customer retention, training new employees, and revamping the application to meet demand for a modern dashboard with analytics and reporting. Our customer base grew exponentially and retention was higher than ever.
 
-In 2022, as the company was expanding, I was welcomed as one of the founding members of a Blockchain Development team. Again I had the privilege of architecting innovative solutions from the ground up, and working on the fore-front of technology, where we combined the strengths of Web2 with Web3. Over the course of the next eight months, we launched eight complete blockchain ecosystems for eight companies, breaking all projected goals.
+With a small but mighty team, we launched eight complete blockchain ecosystems for eight companies.
 
-Check out these 8 amazing pioneers of Web 3.0 below:
+Check out these amazing pioneers of Web 3.0 below:
 
 - [Connect United](https://www.ConnectUnited.com)
 - [Elevate United](https://ElevateUnited.com)
