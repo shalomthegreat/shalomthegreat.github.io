@@ -9,7 +9,7 @@ order: 4
 
 Hi, I'm a software engineer who currently lives and works in the beautiful Salt Lake valley. I moved here from Seattle in 2019. The sunshine, open spaces, and community spirit have captured my heart and lead me call this home. I am passionate about blockchain and Web 3.0, as well as AI, user experience, and the importance of using technology in [a sustainable and responsible way](https://www.devdiscourse.com/article/science-environment/2443678-the-role-of-technology-in-sustainable-development).
 
-<img src="https://gallery.clintlosee.com/img-get2/I00000WbMB5Sqtlw/fit=600x500/20110917-SquawPeak-001.jpg" width="700" height="400" />
+<img src="assets/img/slc.jpeg" width="700" height="400" alt="the salt lake valley during sunset" />
 
 # How I got started...
 
