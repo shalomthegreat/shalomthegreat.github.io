@@ -1,8 +1,13 @@
 import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { ImageOff, X } from 'lucide-react'
+import { ArrowUpRight, ImageOff, Music, Sparkles, X } from 'lucide-react'
 import { PageWrapper, Reveal } from '../components/motion'
-import { artGallery } from '../data/content'
+import { aiProfiles, artGallery } from '../data/content'
+
+const profileIcons = {
+  MidJourney: Sparkles,
+  Suno: Music,
+}
 
 function GalleryImage({ src, alt, onOpen }) {
   const [errored, setErrored] = useState(false)
@@ -68,12 +73,43 @@ export default function Art() {
     <PageWrapper>
       <Reveal className="mb-10">
         <p className="text-sm font-semibold uppercase tracking-widest text-accent">AI Art</p>
-        <h1 className="mt-2 font-display text-3xl font-bold sm:text-4xl">MidJourney Gallery</h1>
+        <h1 className="mt-2 font-display text-3xl font-bold sm:text-4xl">AI Creations Gallery</h1>
         <p className="mt-4 max-w-2xl text-muted">
-          A curated collection of MidJourney pieces exploring characters, light, and color. Tap any image
-          to view it larger.
+          Exploration into AI prompting in the artistic arena, for the purpose of exploring the boundaries of what is possible.
         </p>
       </Reveal>
+
+      <div className="mb-14 grid gap-5 sm:grid-cols-2">
+        {aiProfiles.map((profile, i) => {
+          const Icon = profileIcons[profile.title] || Sparkles
+          return (
+            <Reveal key={profile.title} delay={Math.min(i * 0.05, 0.2)} className="h-full">
+              <a
+                href={profile.url}
+                target="_blank"
+                rel="noreferrer"
+                className="card group relative flex h-full flex-col p-6 hover:-translate-y-1 hover:border-accent/50 hover:shadow-glow"
+              >
+                <span className="grid h-11 w-11 place-items-center rounded-xl bg-accent/10 text-accent transition-colors group-hover:bg-accent group-hover:text-accent-contrast">
+                  <Icon size={20} />
+                </span>
+                <span className="mt-4 text-xs font-semibold uppercase tracking-wide text-muted">{profile.category}</span>
+                <h3 className="mt-1 font-display text-xl font-semibold">{profile.title}</h3>
+                <p className="mt-2 flex-1 text-sm text-muted">{profile.description}</p>
+                <div className="mt-4 flex flex-wrap gap-1.5">
+                  {profile.tags.map((t) => (
+                    <span key={t} className="tag-pill">{t}</span>
+                  ))}
+                </div>
+                <span className="mt-5 inline-flex items-center gap-1 text-sm font-medium text-accent">
+                  View profile{' '}
+                  <ArrowUpRight size={14} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                </span>
+              </a>
+            </Reveal>
+          )
+        })}
+      </div>
 
       <div className="space-y-12">
         {artGallery.map((set, i) => (
