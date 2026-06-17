@@ -25,7 +25,7 @@ export const socials = [
 
 export const skills = [
   'TypeScript / JavaScript',
-  'React & Angular',
+  'React / Vue / Angular',
   'Node.js',
   'Blockchain / Web3',
   'Mobile (Android & iOS)',
@@ -88,11 +88,21 @@ export const projects = [
     tags: ['Web', 'SaaS', 'DevOps', 'Key Contributor'],
     featured: true
   },
+  // Web3 Pioneers
   {
-    title: 'CRM & Marketing Platform',
+    title: 'Blockchain Web3 Platform',
     category: 'Web',
     description:
-      'A full CRM and marketing platform helping businesses manage customers and campaigns.',
+      'A platform for Web3 pioneers to host wallets, provide utility tokens, and grow communities.',
+    to: '/projects/web3-pioneers',
+    tags: ['Web', 'SaaS', 'Web3', 'Key Contributor'],
+    featured: true
+  },
+  {
+    title: 'CRM & Marketing Platforms',
+    category: 'Web',
+    description:
+      'Building custom full-suite CRM and marketing platforms, helping businesses manage customers and campaigns. Supporting companies such as: Solex, ViaVeta, DupliMark, and Envex.',
     // url: 'https://duplimark.com',
     tags: ['Web', 'SaaS', 'CRM', 'Key Contributor'],
   },

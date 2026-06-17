@@ -10,6 +10,7 @@ import Projects from './pages/Projects'
 import Playground from './pages/Playground'
 import Art from './pages/Art'
 import SetPowerFree from './pages/SetPowerFree'
+import Web3Pioneers from './pages/Web3Pioneers'
 import NotFound from './pages/NotFound'
 
 function ScrollToTop() {
@@ -40,6 +41,7 @@ export default function App() {
             <Route path="/about" element={<About />} />
             <Route path="/projects" element={<Projects />} />
             <Route path="/projects/setpowerfree" element={<SetPowerFree />} />
+            <Route path="/projects/web3-pioneers" element={<Web3Pioneers />} />
             <Route path="/playground" element={<Playground />} />
             <Route path="/art" element={<Art />} />
             <Route path="*" element={<NotFound />} />

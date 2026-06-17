@@ -1,6 +1,7 @@
+import { Link } from 'react-router-dom'
 import { ArrowUpRight, Leaf } from 'lucide-react'
 import { PageWrapper, Reveal } from '../components/motion'
-import { profile, story, web3Companies } from '../data/content'
+import { profile, story } from '../data/content'
 
 function PageHeader({ eyebrow, title, children }) {
   return (
@@ -24,14 +25,14 @@ export default function About() {
         .
       </PageHeader>
 
-      <Reveal delay={0.05} className="overflow-hidden rounded-2xl border border-border shadow-soft">
+      {/* <Reveal delay={0.05} className="overflow-hidden rounded-2xl border border-border shadow-soft">
         <img
           src="/img/slc.jpeg"
           alt="The Salt Lake Valley during sunset"
           className="h-56 w-full object-cover sm:h-80"
           loading="lazy"
         />
-      </Reveal>
+      </Reveal> */}
 
       {/* Timeline */}
       <section className="mt-16">
@@ -51,29 +52,14 @@ export default function About() {
       {/* Web3 ecosystems */}
       <section className="mt-16">
         <Reveal>
-          <h2 className="font-display text-2xl font-semibold">Web 3.0 pioneers I helped launch</h2>
+          <Link to="/projects/web3-pioneers" className="group inline-flex items-center gap-2 text-lg font-semibold hover:text-accent">
+            Web 3.0 pioneers I helped launch
+            <ArrowUpRight size={18} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+          </Link>
           <p className="mt-2 text-muted">
-            With a small but mighty team, we shipped eight complete blockchain ecosystems. Check out these pioneers:
+            With a small but mighty team, we shipped eight complete blockchain ecosystems.
           </p>
         </Reveal>
-        <div className="mt-6 grid gap-3 sm:grid-cols-2">
-          {web3Companies.map((c, i) => (
-            <Reveal key={c.name} delay={i * 0.04}>
-              <a
-                href={c.url}
-                target="_blank"
-                rel="noreferrer"
-                className="card group flex items-center justify-between gap-3 p-4 hover:-translate-y-0.5 hover:border-accent/50"
-              >
-                <div>
-                  <span className="font-medium">{c.name}</span>
-                  {c.note && <span className="block text-xs text-muted">{c.note}</span>}
-                </div>
-                <ArrowUpRight size={18} className="shrink-0 text-muted transition-colors group-hover:text-accent" />
-              </a>
-            </Reveal>
-          ))}
-        </div>
       </section>
 
       <Reveal className="mt-12">
