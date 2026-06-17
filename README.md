@@ -1,18 +1,45 @@
-# Getting Started
+# Shalom R. — Portfolio
 
-Visit the Chirpy Theme repo for tips & guides: https://github.com/cotes2020/jekyll-theme-chirpy/wiki
+A modern, mobile-first developer portfolio built with **React + Vite + Tailwind CSS + Framer Motion**.
 
-# General Info
+## Features
 
-The project is pretty straight forward, edit the `_config.yml` for main settings, and add or edit pages in the `_tabs` folder.
+- **Light / dark mode** that defaults to the system/browser preference and persists your choice.
+- **Changeable accent color scheme** (Violet, Ocean, Emerald, Sunset, Amber) via the palette menu.
+- **Dynamic, calming gradient background** with slowly drifting blobs tied to the active accent.
+- **Smooth page transitions** and tasteful scroll-reveal animations (respecting `prefers-reduced-motion`).
+- **Mobile-first**, fully responsive layout with a minimal, adaptable structure.
 
-- [writing a post](https://chirpy.cotes.page/posts/write-a-new-post/)
-- [running a local server](https://chirpy.cotes.page/posts/getting-started/#running-local-server)
-- Local Testing: `bundle exec jekyll s`
-- Ensure build success before deploy: `bundle exec htmlproofer _site --disable-external --check-html --allow_hash_href`
-- Style overrides are found in [this file](_sass/variables-override.scss)
-- Theme update guide [here](https://github.com/cotes2020/jekyll-theme-chirpy/wiki/Upgrade-Guide)
+## Project structure
 
-# Credits
+```
+app/
+├─ public/            # static assets + serverless mini-apps (recipe.html, log.html), images, favicons
+├─ src/
+│  ├─ components/     # Navbar, Footer, AnimatedBackground, ThemeControls, motion helpers
+│  ├─ data/content.js # all site content as structured data
+│  ├─ pages/          # Home, About, Projects, Playground, Art, SetPowerFree, NotFound
+│  ├─ theme/          # ThemeContext (mode + accent)
+│  ├─ App.jsx         # routes + page-transition shell
+│  └─ index.css       # Tailwind layers + theme CSS variables
+└─ vite.config.js
+```
 
-- [favicon artist](https://www.flaticon.com/authors/royyan-wijaya)
+## Develop
+
+```bash
+npm install
+npm run dev      # http://localhost:5173
+```
+
+## Build
+
+```bash
+npm run build    # outputs to dist/
+npm run preview  # preview the production build
+```
+
+## Editing content
+
+All copy lives in `src/data/content.js` — profile, projects, playground apps, the SetPowerFree
+writeup, and the AI art gallery. Update there and the UI follows.

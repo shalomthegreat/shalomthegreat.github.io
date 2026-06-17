@@ -1,4 +1,46 @@
----
-layout: home
-# Index page
----
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/img/favicons/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#0b0b12" />
+    <meta name="author" content="Shalom R." />
+    <meta
+      name="description"
+      content="Shalom R. — software engineer crafting blockchain, Web3, and AI experiences with a focus on clean code and great UX."
+    />
+    <title>Shalom R. — Software Engineer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      // GitHub Pages SPA: restore path encoded by 404.html redirect.
+      (function () {
+        var p = window.location.search.match(/[?&]p=([^&]+)/);
+        if (p) history.replaceState(null, '', decodeURIComponent(p[1]) + window.location.hash);
+      })();
+    </script>
+    <script>
+      // Apply theme before paint to avoid flash of incorrect theme.
+      (function () {
+        try {
+          const stored = JSON.parse(localStorage.getItem('theme') || '{}');
+          const mode = stored.mode || 'system';
+          const accent = stored.accent || 'violet';
+          const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          const isDark = mode === 'dark' || (mode === 'system' && prefersDark);
+          document.documentElement.classList.toggle('dark', isDark);
+          document.documentElement.setAttribute('data-accent', accent);
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
