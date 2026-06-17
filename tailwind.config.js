@@ -39,10 +39,15 @@ export default {
         shimmer: {
           '100%': { transform: 'translateX(100%)' },
         },
+        breathe: {
+          '0%, 100%': { transform: 'scale(0.65)', opacity: '0.15' },
+          '50%': { transform: 'scale(0.85)', opacity: '0.25' },
+        },
       },
       animation: {
         float: 'float 6s ease-in-out infinite',
         'gradient-pan': 'gradient-pan 8s ease infinite',
+        breathe: 'breathe 3s ease-in-out infinite',
       },
     },
   },

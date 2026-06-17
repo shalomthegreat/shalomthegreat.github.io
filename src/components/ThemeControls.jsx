@@ -85,15 +85,25 @@ function AccentPicker() {
             <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-muted">Accent</p>
             <div className="flex flex-wrap gap-2">
               {accents.map((a) => (
-                <button
-                  key={a.id}
-                  onClick={() => setAccent(a.id)}
-                  aria-label={`Use ${a.label} accent`}
-                  className={`h-8 w-8 rounded-full ring-2 ring-offset-2 ring-offset-card transition-transform hover:scale-110 ${
-                    accent === a.id ? 'ring-fg/60' : 'ring-transparent'
-                  }`}
-                  style={{ background: `linear-gradient(135deg, ${a.from}, ${a.to})` }}
-                />
+                <div key={a.id} className="relative">
+                  <button
+                    onClick={() => setAccent(a.id)}
+                    aria-label={`Use ${a.label} accent${a.highContrast ? ' (recommended for high contrast)' : ''}`}
+                    title={a.highContrast ? 'Recommended for high contrast' : undefined}
+                    className={`h-8 w-8 rounded-full ring-2 ring-offset-2 ring-offset-card transition-transform hover:scale-110 ${
+                      accent === a.id ? 'ring-fg/60' : 'ring-transparent'
+                    }`}
+                    style={{ background: `linear-gradient(135deg, ${a.from}, ${a.to})` }}
+                  />
+                  {a.highContrast && (
+                    <span
+                      aria-hidden="true"
+                      className="pointer-events-none absolute bottom-1 -right-1 flex h-3.5 w-3.5 items-center justify-center rounded-full bg-fg text-[7px] font-bold leading-none text-surface"
+                    >
+                      AA
+                    </span>
+                  )}
+                </div>
               ))}
             </div>
           </motion.div>

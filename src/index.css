@@ -10,7 +10,7 @@
     --card: 255 255 255;
     --border: 226 226 234;
     --fg: 22 22 32;
-    --muted: 96 100 120;
+    --muted: 75 79 99;
 
     /* accent defaults (overridden per palette below) */
     --accent: 124 58 237;
@@ -139,23 +139,34 @@
   }
 }
 
-/* Animated gradient mesh background */
-@keyframes mesh-drift {
-  0%   { background-position: 0% 0%, 100% 100%, 50% 0%; }
-  33%  { background-position: 60% 20%, 30% 80%, 80% 50%; }
-  66%  { background-position: 20% 80%, 80% 20%, 10% 90%; }
-  100% { background-position: 0% 0%, 100% 100%, 50% 0%; }
+/* ---- Static background gradients (test variants) ---- */
+
+/* Variant A: minimal — single soft diagonal wash */
+.bg-gradient-static {
+  background-image:
+    linear-gradient(135deg, rgb(var(--accent) / 0.10) 0%, transparent 55%),
+    radial-gradient(ellipse 80% 60% at 50% -10%, rgb(var(--accent-2) / 0.10) 0%, transparent 70%);
 }
 
-.animated-mesh {
+/* Variant B: dynamic-looking — layered multi-stop aurora mesh (still static) */
+.bg-gradient-dynamic {
   background-image:
-    radial-gradient(ellipse 70% 60% at 0% 0%, rgb(var(--accent) / 0.18) 0%, transparent 70%),
-    radial-gradient(ellipse 60% 55% at 100% 100%, rgb(var(--accent-2) / 0.15) 0%, transparent 70%),
-    radial-gradient(ellipse 50% 50% at 50% 0%, rgb(var(--accent) / 0.10) 0%, transparent 60%);
-  background-size: 200% 200%, 200% 200%, 180% 180%;
-  background-position: 0% 0%, 100% 100%, 50% 0%;
-  animation: mesh-drift 28s ease-in-out infinite;
-  will-change: background-position;
+    radial-gradient(ellipse 60% 50% at 12% 8%,  rgb(var(--accent) / 0.22) 0%, transparent 60%),
+    radial-gradient(ellipse 55% 45% at 88% 18%, rgb(var(--accent-2) / 0.20) 0%, transparent 60%),
+    radial-gradient(ellipse 70% 55% at 70% 92%, rgb(var(--accent) / 0.16) 0%, transparent 65%),
+    radial-gradient(ellipse 50% 45% at 25% 85%, rgb(var(--accent-2) / 0.14) 0%, transparent 60%);
+}
+
+/* Boost contrast for users who prefer it */
+@media (prefers-contrast: more) {
+  :root {
+    --muted: 55 58 76;
+    --border: 180 180 195;
+  }
+  .dark {
+    --muted: 190 193 210;
+    --border: 90 90 110;
+  }
 }
 
 /* Respect reduced motion preferences */

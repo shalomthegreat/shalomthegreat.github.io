@@ -1,10 +1,10 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react'
 
 export const ACCENTS = [
-  { id: 'violet', label: 'Violet', from: '#7c3aed', to: '#d946ef' },
+  { id: 'sunset', label: 'Sunset', from: '#f43f5e', to: '#f97316', highContrast: true },
+  { id: 'violet', label: 'Violet', from: '#7c3aed', to: '#d946ef', highContrast: true },
   { id: 'ocean', label: 'Ocean', from: '#0ea5e9', to: '#06b6d4' },
   { id: 'emerald', label: 'Emerald', from: '#10b981', to: '#84cc16' },
-  { id: 'sunset', label: 'Sunset', from: '#f43f5e', to: '#f97316' },
   { id: 'amber', label: 'Amber', from: '#eab308', to: '#f59e0b' },
 ]
 

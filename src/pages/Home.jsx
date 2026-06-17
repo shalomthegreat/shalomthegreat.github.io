@@ -95,11 +95,11 @@ export default function Home() {
           transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
           className="relative shrink-0"
         >
-          <div aria-hidden="true" className="absolute inset-0 -z-10 animate-float rounded-full bg-gradient-to-br from-accent to-accent2 opacity-20" />
+          <div aria-hidden="true" className="absolute inset-0 -z-1 animate-breathe rounded-full bg-gradient-to-br from-accent to-accent2" />
           <img
             src={profile.avatar}
             alt={`Portrait of ${profile.name}`}
-            className="h-44 w-44 rounded-3xl border border-border object-cover shadow-glow sm:h-56 sm:w-56 md:h-64 md:w-64"
+            className="h-44 w-44 rounded-3xl border border-border object-cover shadow-glow opacity-90 sm:h-56 sm:w-56 md:h-64 md:w-64"
             loading="eager"
           />
         </motion.div>
