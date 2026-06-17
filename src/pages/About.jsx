@@ -39,7 +39,7 @@ export default function About() {
         <div className="mt-8 space-y-8 border-l border-border pl-6 sm:pl-8">
           {story.map((item, i) => (
             <Reveal key={item.title} delay={i * 0.05} className="relative">
-              <span className="absolute -left-[31px] top-1.5 grid h-4 w-4 place-items-center rounded-full bg-gradient-to-br from-accent to-accent2 shadow-glow sm:-left-[39px]" />
+              <span aria-hidden="true" className="absolute -left-[31px] top-1.5 grid h-4 w-4 place-items-center rounded-full bg-gradient-to-br from-accent to-accent2 shadow-glow sm:-left-[39px]" />
               <p className="text-xs font-semibold uppercase tracking-wide text-accent">{item.period}</p>
               <h3 className="mt-1 font-display text-xl font-semibold">{item.title}</h3>
               <p className="mt-2 leading-relaxed text-muted">{item.body}</p>
@@ -78,7 +78,7 @@ export default function About() {
 
       <Reveal className="mt-12">
         <div className="card flex items-center gap-3 p-5 text-sm text-muted">
-          <Leaf size={18} className="shrink-0 text-accent" />
+          <Leaf size={18} aria-hidden="true" className="shrink-0 text-accent" />
           Passionate about building technology that's sustainable, responsible, and genuinely helpful.
         </div>
       </Reveal>

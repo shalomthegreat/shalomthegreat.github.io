@@ -54,6 +54,7 @@ export default function Navbar() {
                   {isActive && (
                     <motion.span
                       layoutId="nav-active"
+                      aria-hidden="true"
                       className="absolute inset-0 -z-10 rounded-full bg-accent/10"
                       transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                     />

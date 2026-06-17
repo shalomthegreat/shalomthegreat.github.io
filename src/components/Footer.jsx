@@ -15,17 +15,17 @@ export default function Footer() {
             <p className="mt-3 text-sm text-muted">{profile.tagline}</p>
           </div>
 
-          <div className="flex flex-col gap-3">
-            <span className="text-xs font-semibold uppercase tracking-wide text-muted">Explore</span>
+          <nav aria-label="Site pages" className="flex flex-col gap-3">
+            <span className="text-xs font-semibold uppercase tracking-wide text-muted" aria-hidden="true">Explore</span>
             {navLinks.map((l) => (
               <Link key={l.to} to={l.to} className="text-sm text-muted transition-colors hover:text-accent">
                 {l.label}
               </Link>
             ))}
-          </div>
+          </nav>
 
           <div className="flex flex-col gap-3">
-            <span className="text-xs font-semibold uppercase tracking-wide text-muted">Connect</span>
+            <span className="text-xs font-semibold uppercase tracking-wide text-muted" aria-hidden="true">Connect</span>
             <div className="flex gap-2">
               {socials.map((s) => (
                 <a

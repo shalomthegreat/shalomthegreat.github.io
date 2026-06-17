@@ -15,6 +15,7 @@ export function PageWrapper({ children, className = '' }) {
       initial="initial"
       animate="enter"
       exit="exit"
+      id="main-content"
       className={`container-page pb-10 pt-10 sm:pt-16 ${className}`}
     >
       {children}

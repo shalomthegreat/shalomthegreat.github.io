@@ -29,7 +29,7 @@ export default function SetPowerFree() {
           <Reveal key={step.title} delay={i * 0.05}>
             <div className="card p-6">
               <div className="flex items-center gap-3">
-                <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-gradient-to-br from-accent to-accent2 text-sm font-bold text-accent-contrast">
+                <span aria-hidden="true" className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-gradient-to-br from-accent to-accent2 text-sm font-bold text-accent-contrast">
                   {i + 1}
                 </span>
                 <h2 className="font-display text-lg font-semibold">{step.title}</h2>
@@ -43,7 +43,7 @@ export default function SetPowerFree() {
                   rel="noreferrer"
                   className="mt-3 inline-flex items-center gap-1 text-sm font-medium text-accent hover:underline"
                 >
-                  {step.link.label} <ArrowUpRight size={14} />
+                  {step.link.label} <ArrowUpRight size={14} aria-hidden="true" />
                 </a>
               )}
 
@@ -52,8 +52,8 @@ export default function SetPowerFree() {
                   {step.downloads.map((d) => {
                     const Icon = osIcon[d.os] || Download
                     return (
-                      <a key={d.os} href={d.url} className="btn-ghost">
-                        <Icon size={16} /> {d.os}
+                      <a key={d.os} href={d.url} aria-label={`Download for ${d.os}`} className="btn-ghost">
+                        <Icon size={16} aria-hidden="true" /> {d.os}
                       </a>
                     )
                   })}

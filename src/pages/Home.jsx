@@ -37,7 +37,7 @@ export default function Home() {
             transition={{ duration: 0.5 }}
             className="tag-pill"
           >
-            <MapPin size={13} className="mr-1.5" /> {profile.location}
+            <MapPin size={13} className="mr-1.5" aria-hidden="true" /> {profile.location}
           </motion.span>
 
           <motion.h1
@@ -95,10 +95,10 @@ export default function Home() {
           transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
           className="relative shrink-0"
         >
-          <div className="absolute inset-0 -z-10 animate-float rounded-full bg-gradient-to-br from-accent to-accent2 opacity-30 blur-3xl" />
+          <div aria-hidden="true" className="absolute inset-0 -z-10 animate-float rounded-full bg-gradient-to-br from-accent to-accent2 opacity-20" />
           <img
             src={profile.avatar}
-            alt={profile.name}
+            alt={`Portrait of ${profile.name}`}
             className="h-44 w-44 rounded-3xl border border-border object-cover shadow-glow sm:h-56 sm:w-56 md:h-64 md:w-64"
             loading="eager"
           />

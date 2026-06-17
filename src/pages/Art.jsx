@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { ImageOff, X } from 'lucide-react'
 import { PageWrapper, Reveal } from '../components/motion'
@@ -17,9 +17,10 @@ function GalleryImage({ src, alt, onOpen }) {
 
   return (
     <motion.button
-      onClick={() => onOpen(src)}
+      onClick={(e) => onOpen(src, e)}
       whileHover={{ scale: 1.03 }}
       whileTap={{ scale: 0.98 }}
+      aria-label={`View ${alt} full size`}
       className="group relative aspect-square overflow-hidden rounded-xl border border-border bg-surface/40"
     >
       <img
@@ -36,6 +37,32 @@ function GalleryImage({ src, alt, onOpen }) {
 
 export default function Art() {
   const [active, setActive] = useState(null)
+  const closeRef = useRef(null)
+  const triggerRef = useRef(null)
+
+  function openLightbox(src, e) {
+    triggerRef.current = e.currentTarget
+    setActive(src)
+  }
+
+  function closeLightbox() {
+    setActive(null)
+    triggerRef.current?.focus()
+  }
+
+  useEffect(() => {
+    if (!active) return
+    closeRef.current?.focus()
+    const onKey = (e) => {
+      if (e.key === 'Escape') closeLightbox()
+      if (e.key === 'Tab') {
+        e.preventDefault()
+        closeRef.current?.focus()
+      }
+    }
+    document.addEventListener('keydown', onKey)
+    return () => document.removeEventListener('keydown', onKey)
+  }, [active])
 
   return (
     <PageWrapper>
@@ -54,7 +81,7 @@ export default function Art() {
             <h2 className="mb-4 font-display text-xl font-semibold">{set.title}</h2>
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4">
               {set.images.map((src, j) => (
-                <GalleryImage key={src} src={src} alt={`${set.title} ${j + 1}`} onOpen={setActive} />
+                <GalleryImage key={src} src={src} alt={`${set.title} ${j + 1}`} onOpen={openLightbox} />
               ))}
             </div>
           </Reveal>
@@ -64,17 +91,22 @@ export default function Art() {
       <AnimatePresence>
         {active && (
           <motion.div
+            role="dialog"
+            aria-modal="true"
+            aria-label="Enlarged artwork"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            onClick={() => setActive(null)}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm"
+            onClick={closeLightbox}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4"
           >
             <button
-              aria-label="Close"
+              ref={closeRef}
+              aria-label="Close lightbox"
+              onClick={closeLightbox}
               className="absolute right-5 top-5 grid h-11 w-11 place-items-center rounded-full bg-white/10 text-white hover:bg-white/20"
             >
-              <X size={20} />
+              <X size={20} aria-hidden="true" />
             </button>
             <motion.img
               key={active}
