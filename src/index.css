@@ -10,7 +10,7 @@
     --card: 255 255 255;
     --border: 226 226 234;
     --fg: 22 22 32;
-    --muted: 75 79 99;
+    --muted: 90 94 114;
 
     /* accent defaults (overridden per palette below) */
     --accent: 124 58 237;
@@ -26,7 +26,7 @@
     --card: 22 22 34;
     --border: 40 40 56;
     --fg: 237 238 246;
-    --muted: 150 153 174;
+    --muted: 165 168 189;
 
     --accent-soft: 46 26 84;
   }

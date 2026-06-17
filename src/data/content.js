@@ -39,7 +39,7 @@ export const story = [
   {
     title: 'How I got started',
     period: 'Teenage years',
-    body: "All throughout my teenage years (and even before), I explored the world of Linux software, Windows registry pranks, creating my own Windows themes, upgrading my PC hardware, and building my own websites and small computer applications. Encouraged by good friends, I started learning programming languages — beginning with C and C++ right after high school. My path was derailed by family hardships, so instead of college I steered my time toward a freelancing business, providing local businesses with full-stack web & media solutions using HTML5, jQuery, Angular, and even custom frameworks.",
+    body: "All throughout my early years I explored the world of Linux software, Windows registry pranks, creating my own Windows themes, upgrading my PC hardware, and building my own websites. Encouraged by good friends, I started learning programming languages — beginning with C and C++ during high school. My path was derailed by family hardships, so instead of college I steered my time toward a freelancing business, providing local businesses with full-stack web & media solutions using HTML5, jQuery, Angular, and even custom frameworks.",
   },
   {
     title: 'The adventure begins',

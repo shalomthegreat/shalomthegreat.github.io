@@ -22,7 +22,7 @@ function readStored() {
 export function ThemeProvider({ children }) {
   const stored = readStored()
   const [mode, setMode] = useState(stored.mode || 'system') // 'light' | 'dark' | 'system'
-  const [accent, setAccent] = useState(stored.accent || 'violet')
+  const [accent, setAccent] = useState(stored.accent || 'sunset')
 
   const applyMode = useCallback((nextMode) => {
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
