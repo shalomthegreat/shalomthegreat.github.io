@@ -105,11 +105,11 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* Skills marquee-ish row */}
+      {/* Skills row */}
       <Reveal className="mt-4">
         <div className="flex flex-wrap justify-center gap-2 md:justify-start">
           {skills.map((s) => (
-            <span key={s} className="rounded-full border border-border bg-surface/40 px-3 py-1.5 text-xs font-medium text-muted">
+            <span key={s} className="tag-pill-soft">
               {s}
             </span>
           ))}

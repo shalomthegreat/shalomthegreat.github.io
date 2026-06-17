@@ -70,14 +70,31 @@ export const web3Companies = [
 
 // Projects & Apps
 export const projects = [
+  { // Continuous Ninja
+    title: 'Continuous Ninja',
+    category: 'Web',
+    description:
+      'A platform for continuous deployment and DevOps automation. Built for small teams to reduce overhead and complexity.',
+    links: [
+      {
+        label: 'Prototype',
+        url: 'https://demos--shalomthegreat.app.continuous.ninja/sites/C-Ninja/CN-3.html?theme=blue',
+      },
+      {
+        label: 'Live Application',
+        url: 'https://continuous.ninja',
+      },
+    ],
+    tags: ['Web', 'SaaS', 'DevOps', 'Key Contributor'],
+    featured: true
+  },
   {
     title: 'CRM & Marketing Platform',
     category: 'Web',
     description:
       'A full CRM and marketing platform helping businesses manage customers and campaigns.',
-    url: 'https://duplimark.com',
-    tags: ['Web', 'SaaS', 'CRM'],
-    featured: true,
+    // url: 'https://duplimark.com',
+    tags: ['Web', 'SaaS', 'CRM', 'Key Contributor'],
   },
   {
     title: 'SetPowerFree — GUI Mining Software',
@@ -85,47 +102,48 @@ export const projects = [
     description:
       'Cross-platform desktop mining client for the Green Blockchain, featuring a modern dashboard, analytics, and an auto-update system.',
     to: '/projects/setpowerfree',
-    tags: ['Desktop', 'Blockchain', 'Electron'],
+    tags: ['Desktop', 'Blockchain', 'Electron', 'Key Architect'],
     featured: true,
   },
   {
     title: 'CLI Mining Software',
     category: 'Desktop',
     description:
-      'A lightweight command-line mining client with a custom delivery and installation system.',
-    url: 'https://download.nerdunited.com/node-binaries/hyper/prod/hyper_darwin-amd64',
-    tags: ['CLI', 'Blockchain'],
-    links: [
-      {
-        label: 'Custom Delivery System',
-        url: 'https://download.nerdunited.net/node-binaries/install/NODE_INSTALL.html',
-      },
-      {
-        label: 'Custom Installation Script',
-        url: 'https://download.nerdunited.net/node-binaries/install/mac.sh',
-      },
-    ],
+      'A lightweight command-line mining client with a custom built delivery and installation system.',
+    url: 'https://www.galvan.health/nodes',
+    tags: ['CLI', 'Blockchain', 'Key Architect'],
+    // links: [
+    //   {
+    //     label: 'Custom Delivery System',
+    //     url: 'https://download.nerdunited.net/node-binaries/install/NODE_INSTALL.html',
+    //   },
+    //   {
+    //     label: 'Custom Installation Script',
+    //     url: 'https://download.nerdunited.net/node-binaries/install/mac.sh',
+    //   },
+    // ],
+    featured: true,
   },
   {
     title: 'BotaWave — Social Media App',
-    category: 'Android',
-    description: 'A ground-up social media application for Android.',
-    url: 'https://play.google.com/store/apps/details?id=com.duplimark.fba.botawave&hl=en_US&gl=US',
-    tags: ['Android', 'Mobile', 'Social'],
+    category: 'Mobile',
+    description: 'A ground-up closed-community social media application.',
+    // url: 'https://play.google.com/store/apps/details?id=com.duplimark.fba.botawave&hl=en_US&gl=US',
+    tags: ['Mobile', 'Social', 'Key Contributor'],
   },
   {
     title: 'BotaWave Pro',
-    category: 'Android',
-    description: 'The pro edition of the BotaWave social platform.',
-    url: 'https://play.google.com/store/apps/details?id=com.duplimark.botawave&hl=en_US&gl=US',
-    tags: ['Android', 'Mobile'],
+    category: 'Mobile',
+    description: 'The pro edition of the BotaWave social platform, enabling power users to build a following.',
+    // url: 'https://play.google.com/store/apps/details?id=com.duplimark.botawave&hl=en_US&gl=US',
+    tags: ['Mobile', 'CRM', 'Key Contributor'],
   },
   {
     title: '5HourPlan',
-    category: 'Android',
-    description: 'A productivity and planning app published on the Play Store.',
-    url: 'https://play.google.com/store/apps/details?id=com.duplimark.fivehp&hl=en_US&gl=US',
-    tags: ['Android', 'Productivity'],
+    category: 'Mobile',
+    description: 'A productivity and planning app for marketing professionals.',
+    // url: 'https://play.google.com/store/apps/details?id=com.duplimark.fivehp&hl=en_US&gl=US',
+    tags: ['Mobile', 'Productivity', 'CRM', 'Key Contributor'],
   },
 ]
 
