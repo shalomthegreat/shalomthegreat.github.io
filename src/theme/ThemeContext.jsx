@@ -22,7 +22,19 @@ function readStored() {
 export function ThemeProvider({ children }) {
   const stored = readStored()
   const [mode, setMode] = useState(stored.mode || 'system') // 'light' | 'dark' | 'system'
-  const [accent, setAccent] = useState(stored.accent || 'sunset')
+  const [accent, setAccent] = useState(stored.accent || null)
+
+  const isDark = useMemo(() => {
+    if (mode === 'system') {
+      return typeof window !== 'undefined' && window.matchMedia('(prefers-color-scheme: dark)').matches
+    }
+    return mode === 'dark'
+  }, [mode])
+
+  const activeAccent = useMemo(() => {
+    if (accent) return accent
+    return isDark ? 'sunset' : 'violet'
+  }, [accent, isDark])
 
   const applyMode = useCallback((nextMode) => {
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
@@ -34,9 +46,9 @@ export function ThemeProvider({ children }) {
 
   useEffect(() => {
     applyMode(mode)
-    document.documentElement.setAttribute('data-accent', accent)
+    document.documentElement.setAttribute('data-accent', activeAccent)
     localStorage.setItem(STORAGE_KEY, JSON.stringify({ mode, accent }))
-  }, [mode, accent, applyMode])
+  }, [mode, accent, activeAccent, applyMode])
 
   // React to OS theme changes while in 'system' mode.
   useEffect(() => {
@@ -46,20 +58,13 @@ export function ThemeProvider({ children }) {
     return () => mql.removeEventListener('change', handler)
   }, [mode, applyMode])
 
-  const isDark = useMemo(() => {
-    if (mode === 'system') {
-      return typeof window !== 'undefined' && window.matchMedia('(prefers-color-scheme: dark)').matches
-    }
-    return mode === 'dark'
-  }, [mode])
-
   const toggleMode = useCallback(() => {
-    setMode((m) => (m === 'dark' ? 'light' : 'dark'))
-  }, [])
+    setMode(isDark ? 'light' : 'dark')
+  }, [isDark])
 
   const value = useMemo(
-    () => ({ mode, setMode, toggleMode, accent, setAccent, isDark, accents: ACCENTS }),
-    [mode, toggleMode, accent, isDark]
+    () => ({ mode, setMode, toggleMode, accent: activeAccent, setAccent, isDark, accents: ACCENTS }),
+    [mode, toggleMode, activeAccent, isDark]
   )
 
   return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>

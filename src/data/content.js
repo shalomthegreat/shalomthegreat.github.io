@@ -20,7 +20,7 @@ export const profile = {
 export const socials = [
   { type: 'GitHub', icon: 'github', url: 'https://github.com/shalomthegreat' },
   { type: 'LinkedIn', icon: 'linkedin', url: 'https://www.linkedin.com/in/shalomr' },
-  { type: 'Email', icon: 'mail', url: 'mailto:connect@shalomr.dev' },
+  // { type: 'Email', icon: 'mail', url: 'mailto:connect@shalomr.dev' },
 ]
 
 export const skills = [

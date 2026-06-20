@@ -45,7 +45,7 @@ export default function Footer() {
 
         <div className="mt-10 flex flex-col items-center justify-between gap-2 border-t border-border pt-6 text-xs text-muted sm:flex-row">
           <span>
-            &copy; {year} {profile.name}. Built with React, Tailwind &amp; a little playfulness.
+            &copy; {year} {profile.name} | Built with React, Tailwind, and a little playfulness.
           </span>
           <span className="font-mono">a.k.a. {profile.alias}</span>
         </div>

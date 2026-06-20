@@ -6,17 +6,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta name="theme-color" content="#0b0b12" />
     <meta name="author" content="Shalom R." />
+    <title>Shalom R. — Software Engineer</title>
     <meta
       name="description"
-      content="Shalom R. — software engineer crafting blockchain, Web3, and AI experiences with a focus on clean code and great UX."
+      content="Senior product-focused engineer crafting blockchain, Web3, and AI experiences — with a love for clean code and great UX."
     />
-    <title>Shalom R. — Software Engineer</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
+    <script>
+      // remove legacy Chripy theme cache
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.getRegistrations().then(function(registrations) {
+          for (let registration of registrations) {
+            registration.unregister().then(function(success) {
+              if (success) {
+                console.log('Legacy Service Worker unregistered successfully.');
+                // Clear the cache storage allocated by the old service worker
+                if ('caches' in window) {
+                  caches.keys().then(function(names) {
+                    for (let name of names) caches.delete(name);
+                  });
+                }
+                // Force a single clean reload to fetch the new site files immediately
+                window.location.reload();
+              }
+            });
+          }
+        });
+      }
+    </script>
     <script>
       // GitHub Pages SPA: restore path encoded by 404.html redirect.
       (function () {
@@ -30,9 +52,9 @@
         try {
           const stored = JSON.parse(localStorage.getItem('theme') || '{}');
           const mode = stored.mode || 'system';
-          const accent = stored.accent || 'violet';
           const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
           const isDark = mode === 'dark' || (mode === 'system' && prefersDark);
+          const accent = stored.accent || (isDark ? 'sunset' : 'violet');
           document.documentElement.classList.toggle('dark', isDark);
           document.documentElement.setAttribute('data-accent', accent);
         } catch (e) {}
