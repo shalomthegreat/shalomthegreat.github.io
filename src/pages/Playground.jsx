@@ -1,5 +1,6 @@
-import { ChefHat, NotebookPen, ArrowUpRight } from 'lucide-react'
+import { ChefHat, NotebookPen } from 'lucide-react'
 import { PageWrapper, Reveal } from '../components/motion'
+import LinkCard from '../components/LinkCard'
 import { playground } from '../data/content'
 
 const iconMap = { 'chef-hat': ChefHat, 'notebook-pen': NotebookPen }
@@ -21,22 +22,14 @@ export default function Playground() {
           const Icon = iconMap[app.icon] || ChefHat
           return (
             <Reveal key={app.title} delay={i * 0.06}>
-              <a
+              <LinkCard
                 href={app.url}
-                target="_blank"
-                rel="noreferrer"
-                className="card group flex h-full flex-col p-6 hover:-translate-y-1 hover:border-accent/50 hover:shadow-glow"
-              >
-                <div className="flex items-center justify-between">
-                  <span className="grid h-12 w-12 place-items-center rounded-xl bg-accent/10 text-accent transition-colors group-hover:bg-accent group-hover:text-accent-contrast">
-                    <Icon size={22} />
-                  </span>
-                  <ArrowUpRight size={18} className="text-muted transition-colors group-hover:text-accent" />
-                </div>
-                <h3 className="mt-4 font-display text-xl font-semibold">{app.title}</h3>
-                <p className="mt-2 flex-1 text-sm text-muted">{app.description}</p>
-                <span className="mt-4 text-sm font-medium text-accent">Launch app</span>
-              </a>
+                title={app.title}
+                description={app.description}
+                icon={Icon}
+                ctaText="Launch app"
+                showTopArrow={true}
+              />
             </Reveal>
           )
         })}
