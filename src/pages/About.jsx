@@ -52,12 +52,12 @@ export default function About() {
       {/* Web3 ecosystems */}
       <section className="mt-16">
         <Reveal>
-          <Link to="/projects/web3-pioneers" className="group inline-flex items-center gap-2 text-lg font-semibold hover:text-accent">
+          <Link to="/projects/web3-pioneers" className="group inline-flex items-center gap-2 text-lg font-semibold hover:text-accent hover:cursor-pointer">
             Web 3.0 pioneers I helped launch
             <ArrowUpRight size={18} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </Link>
           <p className="mt-2 text-muted">
-            With a small but mighty team, successfully shipped eight complete blockchain ecosystems to market, ensuring customer retention during transition, and infastructure support for growing customer base.
+            Successfully shipped eight complete blockchain ecosystems to market, ensuring customer retention during transition, and infastructure support for growing customer base.
           </p>
         </Reveal>
       </section>

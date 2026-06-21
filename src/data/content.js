@@ -38,18 +38,18 @@ export const skills = [
 export const story = [
   {
     title: 'How I got started',
-    period: 'Teenage years',
-    body: "All throughout my early years I explored the world of Linux software, Windows registry pranks, creating my own Windows themes, upgrading my PC hardware, and building my own websites. Encouraged by good friends, I started learning programming languages — beginning with C and C++ during high school. My path was derailed by family hardships, so instead of college I steered my time toward a freelancing business, providing local businesses with full-stack web & media solutions using HTML5, jQuery, Angular, and even custom frameworks.",
+    period: 'Early career',
+    body: 'My path into software started with hands-on curiosity: building websites, customizing systems, and learning C and C++ in high school. Instead of taking a traditional college route, I turned that momentum into freelance work for local businesses, delivering full-stack web and media solutions with HTML5, jQuery, Angular, and custom frameworks.',
   },
   {
     title: 'From junior to key contributor',
     period: '2017 - 2021',
-    body: "I asked God to open doors for me to pursue my true passion in software engineering. It wasn't long after that an opportunity opened up at a local startup. What began as a website re-skin became an almost 4-year tenure — revamping and building new products from the ground up. My reputation for quick, efficient, bug-free work and strong task management landed me a lead role. By mid-2020, our team of three devs was so efficient we built a ground-up social media app for Android and iOS in a record three months. We continued to build for local businesses through innovative tech solutions through COVID, but eventually the company had to shut down due to hardships.",
+    body: "In 2017, I got the opportunity to turn that freelance foundation into a full-time software engineering role at a local startup. What began as a website re-skin became an almost four-year run building and revamping products from the ground up. My speed, reliability, and task ownership helped me grow into a lead role, where our small team delivered web platforms and full Android and iOS social media apps in record time to our clients.",
   },
   {
     title: 'Startup growth & scaling',
     period: '2021 – 2023',
-    body: 'I was among the first few devs hired at a visionary blockchain and Web3 tech incubator called BlockBot. Over two years, we grew from a handful of devs to over 200 employees. As lead developer for their multi-platform mining software, I architected the auto-update system essential for customer retention, trained new employees, and revamped the application into a modern dashboard with analytics and reporting. Our customer base grew exponentially and retention was higher than ever. With a small but mighty team, we launched eight complete blockchain ecosystems for eight companies.',
+    body: 'I was among the first few devs hired at a visionary blockchain and Web3 tech incubator called BlockBot. Over two years, we grew from a handful of devs to over 200 employees. As lead developer for their multi-platform mining software, I architected the auto-update system, trained new employees, and revamped the application into a modern dashboard with analytics and reporting. Our customer base grew exponentially and retention was higher than ever. With a small but mighty team, we launched eight complete blockchain ecosystems.',
   },
   {
     title: 'Journey running my own company',
