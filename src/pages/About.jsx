@@ -57,7 +57,7 @@ export default function About() {
             <ArrowUpRight size={18} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </Link>
           <p className="mt-2 text-muted">
-            With a small but mighty team, we shipped eight complete blockchain ecosystems.
+            With a small but mighty team, successfully shipped eight complete blockchain ecosystems to market, ensuring customer retention during transition, and infastructure support for growing customer base.
           </p>
         </Reveal>
       </section>

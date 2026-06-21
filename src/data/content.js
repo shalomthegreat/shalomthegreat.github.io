@@ -42,14 +42,19 @@ export const story = [
     body: "All throughout my early years I explored the world of Linux software, Windows registry pranks, creating my own Windows themes, upgrading my PC hardware, and building my own websites. Encouraged by good friends, I started learning programming languages — beginning with C and C++ during high school. My path was derailed by family hardships, so instead of college I steered my time toward a freelancing business, providing local businesses with full-stack web & media solutions using HTML5, jQuery, Angular, and even custom frameworks.",
   },
   {
-    title: 'The adventure begins',
-    period: 'Late 2017',
-    body: "I asked God to open doors for me to pursue my true passion in software engineering. It wasn't long after that an opportunity opened up at a local startup. What began as a website re-skin became an almost 4-year tenure — revamping and building new products from the ground up. My reputation for quick, efficient, bug-free work and strong task management landed me a lead role. By mid-2020, our team of three devs was so efficient we built a ground-up social media app for Android and iOS in a record three months. Unfortunately, due to COVID losses and rapid market changes, the company closed its doors not long after.",
+    title: 'From junior to key contributor',
+    period: '2017 - 2021',
+    body: "I asked God to open doors for me to pursue my true passion in software engineering. It wasn't long after that an opportunity opened up at a local startup. What began as a website re-skin became an almost 4-year tenure — revamping and building new products from the ground up. My reputation for quick, efficient, bug-free work and strong task management landed me a lead role. By mid-2020, our team of three devs was so efficient we built a ground-up social media app for Android and iOS in a record three months. We continued to build for local businesses through innovative tech solutions through COVID, but eventually the company had to shut down due to hardships.",
   },
   {
-    title: 'Achievement unlocked',
+    title: 'Startup growth & scaling',
     period: '2021 – 2023',
     body: 'I was among the first few devs hired at a visionary blockchain and Web3 tech incubator called BlockBot. Over two years, we grew from a handful of devs to over 200 employees. As lead developer for their multi-platform mining software, I architected the auto-update system essential for customer retention, trained new employees, and revamped the application into a modern dashboard with analytics and reporting. Our customer base grew exponentially and retention was higher than ever. With a small but mighty team, we launched eight complete blockchain ecosystems for eight companies.',
+  },
+  {
+    title: 'Journey running my own company',
+    period: '2023 – present',
+    body: 'When AI hit the scene, I sensed the shift in the tech industry and began training myself in AI technologies. I founded Digital Landscapes to help businesses leverage cutting-edge technology to achieve their goals. I specialize in Web3 and AI solutions, and I work with startups and talented developers seeking to deliver high-quality products and services to market rapidly. The future of tech belongs to those who can pivot, deliver quickly, and develop solid and secure code in the midst of this ever-evolving landscape.',
   },
 ]
 
@@ -88,9 +93,28 @@ export const projects = [
     tags: ['Web', 'SaaS', 'DevOps', 'Key Contributor'],
     featured: true
   },
+  // Connect United
+  {
+    title: 'Connect United',
+    category: 'Web',
+    description:
+      'A blockchain-based platform for connecting people and businesses through social networking and community building.',
+    links: [
+      {
+        label: 'Project Summary PDF',
+        url: '/portfolio/ImpactEngine.pdf',
+      },
+      {
+        label: 'Live Application (Invite Only)',
+        url: 'https://connectunited.com',
+      }
+    ],
+    tags: ['Web', 'Social', 'Contractor'],
+    featured: true
+  },
   // Web3 Pioneers
   {
-    title: 'Blockchain Web3 Platform',
+    title: 'Blockchain Web3 Platforms',
     category: 'Web',
     description:
       'A platform for Web3 pioneers to host wallets, provide utility tokens, and grow communities.',
@@ -134,10 +158,17 @@ export const projects = [
     // ],
     featured: true,
   },
+  // Mobile Apps
   {
     title: 'BotaWave — Social Media App',
     category: 'Mobile',
     description: 'A ground-up closed-community social media application.',
+    links: [
+      {
+        label: 'Wireframes PDF',
+        url: '/portfolio/BotaWave.pdf',
+      },
+    ],
     // url: 'https://play.google.com/store/apps/details?id=com.duplimark.fba.botawave&hl=en_US&gl=US',
     tags: ['Mobile', 'Social', 'Key Contributor'],
   },

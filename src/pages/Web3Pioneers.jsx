@@ -22,7 +22,7 @@ export default function Web3Pioneers() {
           </div>
         </div>
         <p className="mt-6 leading-relaxed text-muted">
-          With a small but mighty team, we shipped eight complete blockchain ecosystems, each including:
+          Successfully shipped eight complete blockchain ecosystems to market, ensuring customer retention during transition, and infastructure support for growing customer base.  I was a key contributor during each phase, from backend infrastructure to frontend applications, contributing to team growth and project success.
         </p>
         <p className='leading-relaxed'>
           {technologies.map((tech, i) => (

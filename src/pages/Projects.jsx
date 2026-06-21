@@ -5,7 +5,7 @@ import { ArrowRight, ArrowUpRight, Star } from 'lucide-react'
 import { PageWrapper, Reveal } from '../components/motion'
 import { projects } from '../data/content'
 
-const categories = ['All', 'Web', 'Desktop', 'Mobile']
+const categories = ['Featured', 'Web', 'Desktop', 'Mobile', 'All']
 
 function ProjectCard({ p, index }) {
   const isInternal = Boolean(p.to)
@@ -57,7 +57,7 @@ function ProjectCard({ p, index }) {
 
       {hasLink && (<Wrapper
         {...wrapperProps}
-        className="mt-5 inline-flex justify-end items-center gap-1 text-sm font-medium text-accent"
+        className="mt-5 inline-flex justify-end items-center gap-1 text-sm font-medium text-accent2"
       >
         {isInternal ? 'Read more' : 'Visit'}{' '}
         {isInternal ? (
@@ -71,11 +71,12 @@ function ProjectCard({ p, index }) {
 }
 
 export default function Projects() {
-  const [filter, setFilter] = useState('All')
-  const filtered = useMemo(
-    () => (filter === 'All' ? projects : projects.filter((p) => p.category === filter)),
-    [filter]
-  )
+  const [filter, setFilter] = useState('Featured')
+  const filtered = useMemo(() => {
+    if (filter === 'All') return projects
+    if (filter === 'Featured') return projects.filter((p) => p.featured)
+    return projects.filter((p) => p.category === filter)
+  }, [filter])
 
   return (
     <PageWrapper>
