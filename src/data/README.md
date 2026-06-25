@@ -278,3 +278,81 @@ type NavLinksList = NavLink[];
 #### Usage
 - **Navbar**: [src/components/Navbar.jsx](../components/Navbar.jsx) — drives the header navigation links.
 - **Footer**: [src/components/Footer.jsx](../components/Footer.jsx) — drives the footer navigation directory list.
+
+---
+
+## Articles
+
+Unlike the structures above, articles are **not** authored in `content.js`. Each
+article is a standalone Markdown file in
+[`src/content/articles/`](../content/articles). Drop in a new `.md` file and it
+automatically appears in the gallery and gets its own route at
+`/articles/<filename>` — no code changes required.
+
+### Loader
+
+[`src/data/articles.js`](./articles.js) globs every `*.md` file at build time
+(`import.meta.glob`), parses the frontmatter, and exports a sorted `articles`
+array plus a `getArticle(slug)` helper.
+
+```typescript
+interface Article {
+  slug: string;        // defaults to the filename (without .md)
+  title: string;       // may contain *italic* markup (rendered in accent)
+  eyebrow: string;     // small uppercase category line
+  subtitle: string;
+  date: string;        // YYYY-MM-DD (used for sorting, newest first)
+  readingTime: string; // e.g. '12 min read'
+  excerpt: string;     // shown on the gallery card
+  featured: boolean;
+  body: string;        // raw markdown body (everything after frontmatter)
+}
+```
+
+### Frontmatter
+
+A minimal `key: value` block fenced by `---`. Booleans (`true`/`false`) are
+coerced; everything else stays a string.
+
+```markdown
+---
+title: Distributed *Minds*
+eyebrow: Essay · Epistemics · Technology
+subtitle: A short italic standfirst.
+date: 2025-01-12
+readingTime: 12 min read
+excerpt: One-or-two sentence summary for the gallery card.
+featured: true
+---
+```
+
+### Supported Markdown (intentionally limited)
+
+Rendered by [`src/lib/markdown.jsx`](../lib/markdown.jsx). Only the following are
+supported — anything else is treated as plain paragraph text:
+
+- **Block:** `## h2` (section, auto top-rule), `### h3` (accent sub-head),
+  `> blockquote` (pull quote), `- ` / `* ` unordered lists, `1. ` ordered lists.
+- **Inline:** `**bold**`, `*italic*` / `_italic_`, `[text](url)`.
+- **Custom blocks:**
+  - `:::triad … :::` — a 3-step flow grid; items are `### Label` + body text.
+  - `:::coda Label … :::` — a closing callout; `Label` is optional.
+
+```markdown
+:::triad
+### Emotion
+The fastest and most holistic signal.
+### Intuition
+Compressed experience below articulation.
+### Reason
+Slow, articulable, checkable.
+:::
+
+:::coda In Closing
+The closing thought, set in display type.
+:::
+```
+
+#### Usage
+- **Gallery**: [src/pages/articles/Articles.jsx](../pages/articles/Articles.jsx) — renders the stacked list of article cards.
+- **Article view**: [src/pages/articles/Article.jsx](../pages/articles/Article.jsx) — renders a single article header + parsed body.

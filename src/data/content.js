@@ -188,13 +188,22 @@ export const projects = [
   },
 ]
 
-// Serverless mini-apps. Served as static files.
+// Sharable Projects and Demos
 export const playground = [
+  {
+    title: 'Family Recipe Box',
+    description:
+      'A shared database of family recipes that can be searched and filtered.',
+    url: 'https://github.com/shalomthegreat/recipe-db',
+    tags: ['GitHub', 'Open Source', 'AI Gen'],
+    icon: 'github',
+  },
   {
     title: 'Recipe Formatter',
     description:
       'Save your favorite online recipes WITH your custom edits. Format recipes for printing without the ads and clutter, and save them for offline viewing.',
     url: '/recipe.html',
+    tags: ['Hand-Made', '#BeforeAI'],
     icon: 'chef-hat',
   },
   {
@@ -202,6 +211,7 @@ export const playground = [
     description:
       'A simple, offline-friendly journal to track your health and log allergy symptoms over time.',
     url: '/log.html',
+    tags: ['Hand-Made', '#BeforeAI'],
     icon: 'notebook-pen',
   },
 ]
@@ -282,4 +292,5 @@ export const navLinks = [
   { label: 'Projects', to: '/projects' },
   { label: 'Playground', to: '/playground' },
   { label: 'AI Art', to: '/art' },
+  { label: 'Articles', to: '/articles' },
 ]

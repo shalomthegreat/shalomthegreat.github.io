@@ -12,8 +12,8 @@ export default function Playground() {
         <p className="text-sm font-semibold uppercase tracking-widest text-accent">Playground</p>
         <h1 className="mt-2 font-display text-3xl font-bold sm:text-4xl">Welcome to my space</h1>
         <p className="mt-4 max-w-2xl text-muted">
-          In my spare time, I like to create serverless mini-apps that can be easily transferred and used
-          offline. Here are a few of my favorites.
+          In my spare time, I like to create mini-apps that can be easily transferred and used
+          offline to accomplish some utility. Here are a few of my favorites.
         </p>
       </Reveal>
 
@@ -27,6 +27,7 @@ export default function Playground() {
                 title={app.title}
                 description={app.description}
                 icon={Icon}
+                tags={app.tags}
                 ctaText="Launch app"
                 showTopArrow={true}
               />

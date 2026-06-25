@@ -10,7 +10,7 @@ const highlights = [
     to: '/projects',
     icon: Sparkles,
     title: 'Projects',
-    desc: 'Web, desktop & mobile apps — from CRMs to blockchain mining software.',
+    desc: 'Enteprise Web, desktop & mobile apps — from CRMs to blockchain mining software.',
   },
   {
     to: '/playground',
