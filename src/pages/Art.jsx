@@ -76,7 +76,7 @@ export default function Art() {
         <p className="text-sm font-semibold uppercase tracking-widest text-accent">AI Art</p>
         <h1 className="mt-2 font-display text-3xl font-bold sm:text-4xl">AI Creations Gallery</h1>
         <p className="mt-4 max-w-2xl text-muted">
-          Exploration into AI prompting in the artistic arena, for the purpose of exploring the boundaries of what is possible, and to explore it's possible applications.
+          Exploration into AI prompting in the artistic arena, for the purpose of exploring the boundaries of what is possible.
         </p>
       </Reveal>
 

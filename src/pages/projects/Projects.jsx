@@ -5,7 +5,7 @@ import { ArrowRight, ArrowUpRight, Star } from 'lucide-react'
 import { PageWrapper, Reveal } from '../../components/motion'
 import { projects } from '../../data/content'
 
-const categories = ['Featured', 'Web', 'Desktop', 'Mobile', 'All']
+const categories = ['All', 'Featured', 'Web', 'Desktop', 'Mobile']
 
 function ProjectCard({ p, index }) {
   const isInternal = Boolean(p.to)
@@ -71,7 +71,7 @@ function ProjectCard({ p, index }) {
 }
 
 export default function Projects() {
-  const [filter, setFilter] = useState('Featured')
+  const [filter, setFilter] = useState('All')
   const filtered = useMemo(() => {
     if (filter === 'All') return projects
     if (filter === 'Featured') return projects.filter((p) => p.featured)
@@ -82,7 +82,7 @@ export default function Projects() {
     <PageWrapper>
       <Reveal className="mb-8">
         <p className="text-sm font-semibold uppercase tracking-widest text-accent">Projects</p>
-        <h1 className="mt-2 font-display text-3xl font-bold sm:text-4xl">Things I've helped build</h1>
+        <h1 className="mt-2 font-display text-3xl font-bold sm:text-4xl">Software I've helped build</h1>
         <p className="mt-4 max-w-2xl text-muted">
           A selection of apps I've played a key role in building — across web, desktop, and mobile.
         </p>

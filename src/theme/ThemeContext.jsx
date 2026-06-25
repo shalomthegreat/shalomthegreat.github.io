@@ -33,7 +33,7 @@ export function ThemeProvider({ children }) {
 
   const activeAccent = useMemo(() => {
     if (accent) return accent
-    return isDark ? 'sunset' : 'violet'
+    return isDark ? 'violet' : 'sunset'
   }, [accent, isDark])
 
   const applyMode = useCallback((nextMode) => {
