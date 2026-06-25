@@ -1,7 +1,7 @@
-import { Link } from 'react-router-dom'
-import { ArrowLeft, ArrowUpRight, Rocket } from 'lucide-react'
-import { PageWrapper, Reveal } from '../components/motion'
-import { web3Companies } from '../data/content'
+import { ArrowUpRight, Rocket } from 'lucide-react'
+import { PageWrapper, Reveal } from '../../components/motion'
+import ProjectDetailHeader from '../../components/ProjectDetailHeader'
+import { web3Companies } from '../../data/content'
 
 export default function Web3Pioneers() {
   const technologies = ['Blockchain Infrastructure', 'Non-Custodial Wallet', 'Back Office (Web App)', 'Mining Applications (Desktop App)']
@@ -9,18 +9,12 @@ export default function Web3Pioneers() {
   return (
     <PageWrapper className="max-w-3xl">
       <Reveal>
-        <Link to="/projects" className="inline-flex items-center gap-1.5 text-sm text-muted hover:text-accent">
-          <ArrowLeft size={15} /> View All Projects
-        </Link>
-        <div className="mt-6 flex items-center gap-3">
-          <span className="grid h-12 w-12 place-items-center rounded-xl bg-accent/10 text-accent">
-            <Rocket size={24} />
-          </span>
-          <div>
-            <h1 className="font-display text-3xl font-bold">Web 3.0 pioneers I helped launch</h1>
-            <p className="text-sm text-muted">2021 – 2023</p>
-          </div>
-        </div>
+        <ProjectDetailHeader
+          icon={Rocket}
+          title="Web 3.0 pioneers I helped launch"
+          subtitle="2021 – 2023"
+          backLabel="View All Projects"
+        />
         <p className="mt-6 leading-relaxed text-muted">
           Successfully shipped eight complete blockchain ecosystems to market, ensuring customer retention during transition, and infastructure support for growing customer base.  I was a key contributor during each phase, from backend infrastructure to frontend applications, contributing to team growth and project success.
         </p>

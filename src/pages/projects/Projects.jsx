@@ -2,8 +2,8 @@ import { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { ArrowRight, ArrowUpRight, Star } from 'lucide-react'
-import { PageWrapper, Reveal } from '../components/motion'
-import { projects } from '../data/content'
+import { PageWrapper, Reveal } from '../../components/motion'
+import { projects } from '../../data/content'
 
 const categories = ['Featured', 'Web', 'Desktop', 'Mobile', 'All']
 

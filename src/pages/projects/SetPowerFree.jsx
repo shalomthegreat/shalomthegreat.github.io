@@ -1,7 +1,7 @@
-import { Link } from 'react-router-dom'
-import { Apple, ArrowLeft, ArrowUpRight, Download, Leaf, Monitor, Terminal } from 'lucide-react'
-import { PageWrapper, Reveal } from '../components/motion'
-import { setPowerFree } from '../data/content'
+import { Apple, ArrowUpRight, Download, Leaf, Monitor, Terminal } from 'lucide-react'
+import { PageWrapper, Reveal } from '../../components/motion'
+import ProjectDetailHeader from '../../components/ProjectDetailHeader'
+import { setPowerFree } from '../../data/content'
 
 const osIcon = { Mac: Apple, Windows: Monitor, Linux: Terminal }
 
@@ -9,18 +9,11 @@ export default function SetPowerFree() {
   return (
     <PageWrapper className="max-w-3xl">
       <Reveal>
-        <Link to="/projects" className="inline-flex items-center gap-1.5 text-sm text-muted hover:text-accent">
-          <ArrowLeft size={15} /> Back to projects
-        </Link>
-        <div className="mt-6 flex items-center gap-3">
-          <span className="grid h-12 w-12 place-items-center rounded-xl bg-accent/10 text-accent">
-            <Leaf size={24} />
-          </span>
-          <div>
-            <h1 className="font-display text-3xl font-bold">{setPowerFree.title}</h1>
-            <p className="text-sm text-muted">{setPowerFree.date}</p>
-          </div>
-        </div>
+        <ProjectDetailHeader
+          icon={Leaf}
+          title={setPowerFree.title}
+          subtitle={setPowerFree.date}
+        />
         <p className="mt-6 leading-relaxed text-muted">{setPowerFree.intro}</p>
       </Reveal>
 

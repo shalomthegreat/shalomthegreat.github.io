@@ -134,7 +134,7 @@ type Web3CompaniesList = Web3Company[];
 ```
 
 #### Usage
-- **Web3 Pioneers Page**: [src/pages/Web3Pioneers.jsx](../pages/Web3Pioneers.jsx) — renders a list of partnered/incubated blockchain projects.
+- **Web3 Pioneers Page**: [src/pages/projects/Web3Pioneers.jsx](../pages/projects/Web3Pioneers.jsx) — renders a list of partnered/incubated blockchain projects.
 
 ---
 
@@ -163,7 +163,7 @@ type ProjectsList = Project[];
 ```
 
 #### Usage
-- **Projects Page**: [src/pages/Projects.jsx](../pages/Projects.jsx) — renders the project grid filterable by category tags.
+- **Projects Page**: [src/pages/projects/Projects.jsx](../pages/projects/Projects.jsx) — renders the project grid filterable by category tags.
 
 ---
 
@@ -219,7 +219,7 @@ interface InitiativeDetails {
 ```
 
 #### Usage
-- **SetPowerFree Page**: [src/pages/SetPowerFree.jsx](../pages/SetPowerFree.jsx) — renders the campaign description, steps, and node installer downloads.
+- **SetPowerFree Page**: [src/pages/projects/SetPowerFree.jsx](../pages/projects/SetPowerFree.jsx) — renders the campaign description, steps, and node installer downloads.
 
 ---
 
