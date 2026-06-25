@@ -3,6 +3,7 @@ import { ArrowRight, CalendarDays, Clock, Star } from 'lucide-react'
 import { PageWrapper, Reveal } from '../../components/motion'
 import { renderInline } from '../../lib/markdown'
 import { articles } from '../../data/articles'
+import SEO from '../../components/SEO'
 
 function formatDate(date) {
   if (!date) return ''
@@ -14,6 +15,10 @@ function formatDate(date) {
 export default function Articles() {
   return (
     <PageWrapper className="max-w-3xl">
+      <SEO
+        title="Articles"
+        description="Essays by Shalom R. on technology, consensus systems, blockchain, AI, human behavior, and great UX."
+      />
       <Reveal className="mb-8">
         <p className="text-sm font-semibold uppercase tracking-widest text-accent">Articles</p>
         <h1 className="mt-2 font-display text-3xl font-bold sm:text-4xl">Writing &amp; essays</h1>

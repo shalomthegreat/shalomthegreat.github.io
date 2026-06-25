@@ -4,6 +4,7 @@ import { ArrowRight, FlaskConical, MapPin, Sparkles, Wand2 } from 'lucide-react'
 import { PageWrapper, Reveal, staggerContainer, staggerItem } from '../components/motion'
 import { profile, skills, socials } from '../data/content'
 import SocialIcon from '../components/SocialIcon'
+import SEO from '../components/SEO'
 
 const highlights = [
   {
@@ -29,6 +30,7 @@ const highlights = [
 export default function Home() {
   return (
     <PageWrapper>
+      <SEO title="Shalom R. — Software Engineer" exactTitle={true} description={profile.tagline} />
       <section className="flex flex-col items-center gap-10 py-8 sm:py-16 md:flex-row md:gap-14">
         <div className="flex-1 text-center md:text-left">
           <motion.span

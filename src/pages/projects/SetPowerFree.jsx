@@ -2,12 +2,17 @@ import { Apple, ArrowUpRight, Download, Leaf, Monitor, Terminal } from 'lucide-r
 import { PageWrapper, Reveal } from '../../components/motion'
 import ProjectDetailHeader from '../../components/ProjectDetailHeader'
 import { setPowerFree } from '../../data/content'
+import SEO from '../../components/SEO'
 
 const osIcon = { Mac: Apple, Windows: Monitor, Linux: Terminal }
 
 export default function SetPowerFree() {
   return (
     <PageWrapper className="max-w-3xl">
+      <SEO
+        title="The SetPowerFree Initiative"
+        description="GREEN is a digital reward of the Green Blockchain that measures energy contribution to blockchain technologies. Supported by a modern cross-platform desktop mining dashboard, analytics, and an auto-update system."
+      />
       <Reveal>
         <ProjectDetailHeader
           icon={Leaf}

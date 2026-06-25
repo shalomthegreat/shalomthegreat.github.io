@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { ArrowUpRight, Leaf } from 'lucide-react'
 import { PageWrapper, Reveal } from '../components/motion'
 import { profile, story } from '../data/content'
+import SEO from '../components/SEO'
 
 function PageHeader({ eyebrow, title, children }) {
   return (
@@ -16,6 +17,11 @@ function PageHeader({ eyebrow, title, children }) {
 export default function About() {
   return (
     <PageWrapper>
+      <SEO
+        title="About"
+        description="Learn about Shalom R.'s journey as a software engineer — from startup growth and scaling to running his own company specializing in Web3 & AI solutions."
+        image="/img/avi.jpg"
+      />
       <PageHeader eyebrow="About" title="A bit about me">
         {profile.intro.split('using technology in')[0]}
         using technology in{' '}

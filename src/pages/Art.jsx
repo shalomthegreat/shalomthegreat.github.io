@@ -4,6 +4,7 @@ import { ImageOff, Music, Sparkles, X } from 'lucide-react'
 import { PageWrapper, Reveal } from '../components/motion'
 import LinkCard from '../components/LinkCard'
 import { aiProfiles, artGallery } from '../data/content'
+import SEO from '../components/SEO'
 
 const profileIcons = {
   MidJourney: Sparkles,
@@ -72,6 +73,10 @@ export default function Art() {
 
   return (
     <PageWrapper>
+      <SEO
+        title="AI Art"
+        description="A curated gallery of MidJourney art experiments and AI creations, exploring the boundaries of lighting, color, and character prompting."
+      />
       <Reveal className="mb-10">
         <p className="text-sm font-semibold uppercase tracking-widest text-accent">AI Art</p>
         <h1 className="mt-2 font-display text-3xl font-bold sm:text-4xl">AI Creations Gallery</h1>

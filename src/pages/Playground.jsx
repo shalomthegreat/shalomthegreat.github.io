@@ -2,12 +2,17 @@ import { ChefHat, NotebookPen } from 'lucide-react'
 import { PageWrapper, Reveal } from '../components/motion'
 import LinkCard from '../components/LinkCard'
 import { playground } from '../data/content'
+import SEO from '../components/SEO'
 
 const iconMap = { 'chef-hat': ChefHat, 'notebook-pen': NotebookPen }
 
 export default function Playground() {
   return (
     <PageWrapper>
+      <SEO
+        title="Playground"
+        description="Explore offline-capable serverless mini-apps, utilities, and fun interactive tools crafted by Shalom R."
+      />
       <Reveal className="mb-10">
         <p className="text-sm font-semibold uppercase tracking-widest text-accent">Playground</p>
         <h1 className="mt-2 font-display text-3xl font-bold sm:text-4xl">Welcome to my space</h1>

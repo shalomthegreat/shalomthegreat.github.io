@@ -2,12 +2,17 @@ import { ArrowUpRight, Rocket } from 'lucide-react'
 import { PageWrapper, Reveal } from '../../components/motion'
 import ProjectDetailHeader from '../../components/ProjectDetailHeader'
 import { web3Companies } from '../../data/content'
+import SEO from '../../components/SEO'
 
 export default function Web3Pioneers() {
   const technologies = ['Blockchain Infrastructure', 'Non-Custodial Wallet', 'Back Office (Web App)', 'Mining Applications (Desktop App)']
 
   return (
     <PageWrapper className="max-w-3xl">
+      <SEO
+        title="Blockchain Web3 Platforms"
+        description="Platforms for Web3 pioneers to host wallets, provide utility tokens, and grow communities. Shalom R. successfully helped ship eight complete blockchain ecosystems to market."
+      />
       <Reveal>
         <ProjectDetailHeader
           icon={Rocket}

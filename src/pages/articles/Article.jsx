@@ -3,6 +3,7 @@ import { ArrowLeft, CalendarDays, Clock } from 'lucide-react'
 import { PageWrapper, Reveal } from '../../components/motion'
 import Markdown, { renderInline } from '../../lib/markdown'
 import { getArticle } from '../../data/articles'
+import SEO from '../../components/SEO'
 
 function formatDate(date) {
   if (!date) return ''
@@ -27,8 +28,15 @@ export default function Article() {
     )
   }
 
+  const cleanTitle = article.title.replace(/\*/g, '')
+
   return (
     <PageWrapper className="max-w-3xl">
+      <SEO
+        title={cleanTitle}
+        description={article.excerpt || article.subtitle}
+        type="article"
+      />
       <Reveal>
         <Link to="/articles" className="inline-flex items-center gap-1.5 text-sm text-muted hover:text-accent">
           <ArrowLeft size={15} /> Back to articles

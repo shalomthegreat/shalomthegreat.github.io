@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import { ArrowRight, ArrowUpRight, Star } from 'lucide-react'
 import { PageWrapper, Reveal } from '../../components/motion'
 import { projects } from '../../data/content'
+import SEO from '../../components/SEO'
 
 const categories = ['All', 'Featured', 'Web', 'Desktop', 'Mobile']
 
@@ -80,6 +81,10 @@ export default function Projects() {
 
   return (
     <PageWrapper>
+      <SEO
+        title="Projects"
+        description="A selection of apps Shalom R. has played a key role in building — from enterprise web platforms and CRMs to cross-platform desktop mining software."
+      />
       <Reveal className="mb-8">
         <p className="text-sm font-semibold uppercase tracking-widest text-accent">Projects</p>
         <h1 className="mt-2 font-display text-3xl font-bold sm:text-4xl">Software I've helped build</h1>
