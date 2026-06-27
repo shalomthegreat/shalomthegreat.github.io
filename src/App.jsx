@@ -10,7 +10,7 @@ import Projects from './pages/projects/Projects'
 import Playground from './pages/Playground'
 import Art from './pages/Art'
 import Articles from './pages/articles/Articles'
-import Article from './pages/articles/Article'
+import ArticleViewer from './pages/articles/ArticleViewer'
 import SetPowerFree from './pages/projects/SetPowerFree'
 import Web3Pioneers from './pages/projects/Web3Pioneers'
 import NotFound from './pages/NotFound'
@@ -45,7 +45,7 @@ export default function App() {
             <Route path="/projects/setpowerfree" element={<SetPowerFree />} />
             <Route path="/projects/web3-pioneers" element={<Web3Pioneers />} />
             <Route path="/articles" element={<Articles />} />
-            <Route path="/articles/:slug" element={<Article />} />
+            <Route path="/articles/:slug" element={<ArticleViewer />} />
             <Route path="/playground" element={<Playground />} />
             <Route path="/art" element={<Art />} />
             <Route path="*" element={<NotFound />} />

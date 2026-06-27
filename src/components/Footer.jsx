@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { navLinks, profile, socials } from '../data/content'
+import { navLinks, profile, socials } from '../data/content/mainPageContent'
 import SocialIcon from './SocialIcon'
 
 export default function Footer() {

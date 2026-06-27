@@ -1,11 +1,11 @@
 // Articles loader.
 //
-// Each article lives as a Markdown file in `src/content/articles/*.md` with a
+// Each article lives as a Markdown file in `src/data/content/articles/*.md` with a
 // small YAML-ish frontmatter block. Drop a new `.md` file in that folder and it
 // automatically appears in the gallery and gets its own route — no wiring
 // needed. Vite reads the files as raw strings at build time via import.meta.glob.
 
-const files = import.meta.glob('../content/articles/*.md', {
+const files = import.meta.glob('./content/articles/*.md', {
   query: '?raw',
   import: 'default',
   eager: true,

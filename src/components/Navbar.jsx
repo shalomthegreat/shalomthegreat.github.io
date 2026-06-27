@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
-import { navLinks, profile } from '../data/content'
+import { navLinks, profile } from '../data/content/mainPageContent'
 import ThemeControls from './ThemeControls'
 
 export default function Navbar() {

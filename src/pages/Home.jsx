@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { ArrowRight, FlaskConical, MapPin, Sparkles, Wand2 } from 'lucide-react'
 import { PageWrapper, Reveal, staggerContainer, staggerItem } from '../components/motion'
-import { profile, skills, socials } from '../data/content'
+import { profile, skills, socials } from '../data/content/mainPageContent'
 import SocialIcon from '../components/SocialIcon'
 import SEO from '../components/SEO'
 

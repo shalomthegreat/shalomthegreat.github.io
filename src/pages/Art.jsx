@@ -3,7 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { ImageOff, Music, Sparkles, X } from 'lucide-react'
 import { PageWrapper, Reveal } from '../components/motion'
 import LinkCard from '../components/LinkCard'
-import { aiProfiles, artGallery } from '../data/content'
+import { aiProfiles, artGallery } from '../data/content/mainPageContent'
 import SEO from '../components/SEO'
 
 const profileIcons = {

@@ -1,8 +1,8 @@
 import { Link, useParams } from 'react-router-dom'
 import { ArrowLeft, CalendarDays, Clock } from 'lucide-react'
 import { PageWrapper, Reveal } from '../../components/motion'
-import Markdown, { renderInline } from '../../lib/markdown'
-import { getArticle } from '../../data/articles'
+import Markdown, { renderInline } from '../../components/Markdown'
+import { getArticle } from '../../data/articlesProvider'
 import SEO from '../../components/SEO'
 
 function formatDate(date) {
@@ -12,7 +12,7 @@ function formatDate(date) {
   return d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
 }
 
-export default function Article() {
+export default function ArticleViewer() {
   const { slug } = useParams()
   const article = getArticle(slug)
 

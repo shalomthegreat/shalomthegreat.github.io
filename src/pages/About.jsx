@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { ArrowUpRight, Leaf } from 'lucide-react'
 import { PageWrapper, Reveal } from '../components/motion'
-import { profile, story } from '../data/content'
+import { profile, story } from '../data/content/mainPageContent'
 import SEO from '../components/SEO'
 
 function PageHeader({ eyebrow, title, children }) {

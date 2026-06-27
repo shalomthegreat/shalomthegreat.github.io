@@ -1,7 +1,7 @@
 import { ArrowUpRight, Rocket } from 'lucide-react'
 import { PageWrapper, Reveal } from '../../components/motion'
 import ProjectDetailHeader from '../../components/ProjectDetailHeader'
-import { web3Companies } from '../../data/content'
+import { web3Companies } from '../../data/content/mainPageContent'
 import SEO from '../../components/SEO'
 
 export default function Web3Pioneers() {

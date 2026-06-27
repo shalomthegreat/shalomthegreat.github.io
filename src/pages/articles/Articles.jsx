@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom'
 import { ArrowRight, CalendarDays, Clock, Star } from 'lucide-react'
 import { PageWrapper, Reveal } from '../../components/motion'
-import { renderInline } from '../../lib/markdown'
-import { articles } from '../../data/articles'
+import { renderInline } from '../../components/Markdown'
+import { articles } from '../../data/articlesProvider'
 import SEO from '../../components/SEO'
 
 function formatDate(date) {

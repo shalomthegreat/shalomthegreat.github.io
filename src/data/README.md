@@ -283,15 +283,15 @@ type NavLinksList = NavLink[];
 
 ## Articles
 
-Unlike the structures above, articles are **not** authored in `content.js`. Each
+Unlike the structures above, articles are **not** authored in `content/mainPageContent.js`. Each
 article is a standalone Markdown file in
-[`src/content/articles/`](../content/articles). Drop in a new `.md` file and it
+[`src/data/content/articles/`](./content/articles). Drop in a new `.md` file and it
 automatically appears in the gallery and gets its own route at
 `/articles/<filename>` — no code changes required.
 
 ### Loader
 
-[`src/data/articles.js`](./articles.js) globs every `*.md` file at build time
+[`src/data/articlesProvider.js`](./articlesProvider.js) globs every `*.md` file at build time
 (`import.meta.glob`), parses the frontmatter, and exports a sorted `articles`
 array plus a `getArticle(slug)` helper.
 
@@ -328,7 +328,7 @@ featured: true
 
 ### Supported Markdown (intentionally limited)
 
-Rendered by [`src/lib/markdown.jsx`](../lib/markdown.jsx). Only the following are
+Rendered by [`src/components/Markdown.jsx`](../components/Markdown.jsx). Only the following are
 supported — anything else is treated as plain paragraph text:
 
 - **Block:** `## h2` (section, auto top-rule), `### h3` (accent sub-head),
@@ -355,4 +355,4 @@ The closing thought, set in display type.
 
 #### Usage
 - **Gallery**: [src/pages/articles/Articles.jsx](../pages/articles/Articles.jsx) — renders the stacked list of article cards.
-- **Article view**: [src/pages/articles/Article.jsx](../pages/articles/Article.jsx) — renders a single article header + parsed body.
+- **Article view**: [src/pages/articles/ArticleViewer.jsx](../pages/articles/ArticleViewer.jsx) — renders a single article header + parsed body.

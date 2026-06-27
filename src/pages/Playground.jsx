@@ -1,7 +1,7 @@
 import { ChefHat, NotebookPen } from 'lucide-react'
 import { PageWrapper, Reveal } from '../components/motion'
 import LinkCard from '../components/LinkCard'
-import { playground } from '../data/content'
+import { playground } from '../data/content/mainPageContent'
 import SEO from '../components/SEO'
 
 const iconMap = { 'chef-hat': ChefHat, 'notebook-pen': NotebookPen }

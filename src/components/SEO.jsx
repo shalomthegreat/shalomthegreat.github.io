@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
-import { profile } from '../data/content'
+import { profile } from '../data/content/mainPageContent'
 
 /**
  * SEO component to dynamically manage document metadata and social media preview tags.

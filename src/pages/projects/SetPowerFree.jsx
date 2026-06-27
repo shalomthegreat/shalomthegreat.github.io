@@ -1,7 +1,7 @@
 import { Apple, ArrowUpRight, Download, Leaf, Monitor, Terminal } from 'lucide-react'
 import { PageWrapper, Reveal } from '../../components/motion'
 import ProjectDetailHeader from '../../components/ProjectDetailHeader'
-import { setPowerFree } from '../../data/content'
+import { setPowerFree } from '../../data/content/mainPageContent'
 import SEO from '../../components/SEO'
 
 const osIcon = { Mac: Apple, Windows: Monitor, Linux: Terminal }
