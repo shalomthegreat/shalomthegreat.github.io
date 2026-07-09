@@ -93,6 +93,25 @@ export const projects = [
     tags: ['Web', 'SaaS', 'DevOps', 'Key Contributor'],
     featured: true
   },
+  // Blazing Goat
+  {
+    title: 'Blazing Goat',
+    category: 'Web',
+    description:
+      'A product sales website for a Solopreneur',
+    links: [
+      {
+        label: 'Figma Prototype',
+        url: 'https://www.figma.com/proto/Uv1pnqgkVmTRI31kXFEwXg/Blazing-Goat---v2?node-id=0-1&t=Zjhi76nAT5gZgQl9-1',
+      },
+      {
+        label: 'Live Website',
+        url: 'https://blazinggoat.com',
+      }
+    ],
+    tags: ['Web', 'E-commerce', 'Contractor'],
+    featured: true
+  },
   // Connect United
   {
     title: 'Connect United',
@@ -120,7 +139,7 @@ export const projects = [
       'A platform for Web3 pioneers to host wallets, provide utility tokens, and grow communities.',
     to: '/projects/web3-pioneers',
     tags: ['Web', 'SaaS', 'Web3', 'Key Contributor'],
-    featured: true
+    featured: false
   },
   {
     title: 'CRM & Marketing Platforms',
@@ -146,17 +165,17 @@ export const projects = [
       'A lightweight command-line mining client with a custom built delivery and installation system.',
     url: 'https://www.galvan.health/nodes',
     tags: ['CLI', 'Blockchain', 'Key Architect'],
-    // links: [
-    //   {
-    //     label: 'Custom Delivery System',
-    //     url: 'https://download.nerdunited.net/node-binaries/install/NODE_INSTALL.html',
-    //   },
-    //   {
-    //     label: 'Custom Installation Script',
-    //     url: 'https://download.nerdunited.net/node-binaries/install/mac.sh',
-    //   },
-    // ],
-    featured: true,
+    links: [
+      {
+        label: 'Custom Delivery System',
+        url: 'https://download.nerdunited.net/node-binaries/install/NODE_INSTALL.html',
+      },
+      {
+        label: 'Custom Installation Script',
+        url: 'https://download.nerdunited.net/node-binaries/install/mac.sh',
+      },
+    ],
+    featured: false,
   },
   // Mobile Apps
   {

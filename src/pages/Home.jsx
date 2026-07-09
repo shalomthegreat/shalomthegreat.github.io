@@ -5,6 +5,7 @@ import { PageWrapper, Reveal, staggerContainer, staggerItem } from '../component
 import { profile, skills, socials } from '../data/content/mainPageContent'
 import SocialIcon from '../components/SocialIcon'
 import SEO from '../components/SEO'
+import ForgeSparks from '../components/ForgeSparks'
 
 const highlights = [
   {
@@ -31,6 +32,7 @@ export default function Home() {
   return (
     <PageWrapper>
       <SEO title="Shalom R. — Software Engineer" exactTitle={true} description={profile.tagline} />
+      <ForgeSparks showControls={false} />
       <section className="flex flex-col items-center gap-10 py-8 sm:py-16 md:flex-row md:gap-14">
         <div className="flex-1 text-center md:text-left">
           <motion.span
@@ -144,6 +146,7 @@ export default function Home() {
           </motion.div>
         ))}
       </motion.section>
+
     </PageWrapper>
   )
 }

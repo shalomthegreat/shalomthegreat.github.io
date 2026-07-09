@@ -5,8 +5,9 @@ import { ArrowRight, ArrowUpRight, Star } from 'lucide-react'
 import { PageWrapper, Reveal } from '../../components/motion'
 import { projects } from '../../data/content/mainPageContent'
 import SEO from '../../components/SEO'
+import ForgeSparks from '../../components/ForgeSparks'
 
-const categories = ['All', 'Featured', 'Web', 'Desktop', 'Mobile']
+const categories = ['Featured', 'Web', 'Desktop', 'Mobile', 'All']
 
 function ProjectCard({ p, index }) {
   const isInternal = Boolean(p.to)
@@ -72,7 +73,7 @@ function ProjectCard({ p, index }) {
 }
 
 export default function Projects() {
-  const [filter, setFilter] = useState('All')
+  const [filter, setFilter] = useState('Featured')
   const filtered = useMemo(() => {
     if (filter === 'All') return projects
     if (filter === 'Featured') return projects.filter((p) => p.featured)
@@ -85,6 +86,7 @@ export default function Projects() {
         title="Projects"
         description="A selection of apps Shalom R. has played a key role in building — from enterprise web platforms and CRMs to cross-platform desktop mining software."
       />
+      <ForgeSparks showControls={false} />
       <Reveal className="mb-8">
         <p className="text-sm font-semibold uppercase tracking-widest text-accent">Projects</p>
         <h1 className="mt-2 font-display text-3xl font-bold sm:text-4xl">Software I've helped build</h1>
