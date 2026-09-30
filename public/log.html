@@ -1,15 +1,9 @@
-<!--written by Digital Crayon || digitalcrayondesign.com -->
+<!--written by Digital Crayon || https://shalomr.dev -->
 
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-<link
-  rel="stylesheet"
-  href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css"
-/>
-<link
-  rel="stylesheet"
-  href="file:///Users/owner/Documents/HTML/Snippets/progress-bar.css"
-/>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" />
+<link rel="stylesheet" href="file:///Users/owner/Documents/HTML/Snippets/progress-bar.css" />
 
 <style>
   button {
@@ -169,13 +163,10 @@
     <p style="color: darkgreen"><b>Print / Export Log</b></p>
     <p><textarea id="savet" rows="8" cols="50"></textarea></p>
     <p style="font-size: small; color: gray">
-      Copy and paste to your favorite email or text program. Save, Print or
-      Share.
+      Copy and paste to your favorite email or text program. Save, Print or Share.
     </p>
     <button id="copyl">Copy Log</button>
-    <button class="greenb" onclick="saveTXT('#savet', 'mylog')">
-      Save Log
-    </button>
+    <button class="greenb" onclick="saveTXT('#savet', 'mylog')">Save Log</button>
 
     <hr style="margin-top: 20px" />
 
@@ -183,13 +174,10 @@
     <p><textarea id="saved" rows="4" cols="50"></textarea></p>
     <p style="font-size: small; color: gray">
       Backup your log or export it to a different computer.<br />
-      Send it to yourself, then paste it into the 'Load Data' feature on a new
-      computer.
+      Send it to yourself, then paste it into the 'Load Data' feature on a new computer.
     </p>
     <button id="copyd">Copy Data</button>
-    <button class="greenb" onclick="saveTXT('#saved', 'mydata')">
-      Save Data
-    </button>
+    <button class="greenb" onclick="saveTXT('#saved', 'mydata')">Save Data</button>
   </div>
 </div>
 
@@ -198,25 +186,13 @@
     <p><b>Welcome</b></p>
     <p>A little background before we begin.</p>
     <ul style="text-align: left">
+      <li>Your data is completely private since it is not saved to any servers.</li>
       <li>
-        Your data is completely private since it is not saved to any servers.
+        Any data you provide will be saved only on your browser, and will be available even if you close and restart.
       </li>
-      <li>
-        Any data you provide will be saved only on your browser, and will be
-        available even if you close and restart.
-      </li>
-      <li>
-        However, this means if you use a different browser or computer, you will
-        start a new log for each device.
-      </li>
-      <li>
-        Be sure you start your log on the device you plan to use regularly (such
-        as your phone).
-      </li>
-      <li>
-        In order to pass your log from one device to another, use the provided
-        Export and Load-Data features.
-      </li>
+      <li>However, this means if you use a different browser or computer, you will start a new log for each device.</li>
+      <li>Be sure you start your log on the device you plan to use regularly (such as your phone).</li>
+      <li>In order to pass your log from one device to another, use the provided Export and Load-Data features.</li>
     </ul>
     <p><button id="okb">OK</button></p>
   </div>
@@ -226,9 +202,7 @@
   <div class="box">
     <p><b>Insert Data</b></p>
     <textarea id="loadd" rows="4" cols="50"></textarea>
-    <p style="font-size: small; color: gray">
-      Warning: this will replace the current data (if any). There is no undo.
-    </p>
+    <p style="font-size: small; color: gray">Warning: this will replace the current data (if any). There is no undo.</p>
     <button id="setb">Set</button>
   </div>
 </div>
@@ -250,8 +224,7 @@
           type="range"
           min="0"
           max="10"
-          onchange="$('#energy-val').html('('+$('#energy').val()+')')"
-        />
+          onchange="$('#energy-val').html('(' + $('#energy').val() + ')')" />
       </p>
       <p class="entry">
         PH Level <span id="ph-val" style="color: gray">(6)</span><br />
@@ -262,8 +235,7 @@
           max="8"
           value="6"
           step="0.5"
-          onchange="$('#ph-val').html('('+$('#phv').val()+')')"
-        />
+          onchange="$('#ph-val').html('(' + $('#phv').val() + ')')" />
       </p>
       <p class="entry">
         (Females) Shark Week <br />
@@ -277,22 +249,15 @@
         <textarea
           style="height: 80px"
           id="foods"
-          placeholder="What did you eat today? (Use simple keywords)"
-        ></textarea>
+          placeholder="What did you eat today? (Use simple keywords)"></textarea>
       </p>
       <p class="entry">
         Comments <br />
-        <textarea
-          style="height: 80px"
-          id="comment"
-          placeholder="How did you feel today?"
-        ></textarea>
+        <textarea style="height: 80px" id="comment" placeholder="How did you feel today?"></textarea>
       </p>
     </form>
     <hr />
-    <p style="margin-top: 30px">
-      <button id="cancelb">Cancel</button> <button id="addb">Add</button>
-    </p>
+    <p style="margin-top: 30px"><button id="cancelb">Cancel</button> <button id="addb">Add</button></p>
   </div>
 </div>
 
@@ -303,8 +268,7 @@
       <br /><textarea
         style="height: 80px"
         id="edit-comment"
-        placeholder="How did you feel today? Did you notice anything off?"
-      ></textarea>
+        placeholder="How did you feel today? Did you notice anything off?"></textarea>
     </p>
     <p style="margin-top: 30px">
       <button id="editb">Done</button>
@@ -333,7 +297,7 @@
     { title: "PH" },
     { title: "Foods" },
     { title: "Comments" },
-    { title: "Edit" },
+    { title: "Edit" }
   ];
   var columnsM = [
     { title: "Date" },
@@ -342,7 +306,7 @@
     { title: "PH" },
     { title: "Foods" },
     { title: "Comments" },
-    { title: "Edit" },
+    { title: "Edit" }
   ];
   var columnRenderF = [
     {
@@ -353,45 +317,37 @@
         return new Date(data).toLocaleString();
       },
       width: "200px",
-      targets: 0,
+      targets: 0
     },
     {
       render: function (data, type, row) {
         return '<progress value="' + data + '" max="10" />';
       },
       width: "200px",
-      targets: 1,
+      targets: 1
     },
     {
       render: function (data, type, row) {
-        return data
-          ? '&#128308;<span class="hidden">period</span>'
-          : "&#128309;";
+        return data ? '&#128308;<span class="hidden">period</span>' : "&#128309;";
       },
       width: "80px",
-      targets: 2,
+      targets: 2
     },
     {
       width: "50px",
-      targets: 3,
+      targets: 3
     },
     {
       width: "120px",
-      targets: 4,
+      targets: 4
     },
     {
       render: function (data, type, full, meta) {
-        return (
-          '<a class="edit icon" data="' +
-          meta.row +
-          '"" alt="' +
-          meta.row +
-          '"">&#128395;</a>'
-        );
+        return '<a class="edit icon" data="' + meta.row + '"" alt="' + meta.row + '"">&#128395;</a>';
       },
       width: "30px",
-      targets: 6,
-    },
+      targets: 6
+    }
   ];
 
   //setup
@@ -406,17 +362,17 @@
     $("#mytable").DataTable({
       language: {
         emptyTable:
-          "<p style='margin:10px'>This is the beginning of your log.</p><p id='first'>Add your first entry to get started!</p>",
+          "<p style='margin:10px'>This is the beginning of your log.</p><p id='first'>Add your first entry to get started!</p>"
       },
       order: [[0, "desc"]],
       pageLength: 30,
       lengthMenu: [
         [10, 30, 50, -1],
-        [10, 30, 50, "All"],
+        [10, 30, 50, "All"]
       ],
       data: dataSet,
       columns: columnsF,
-      columnDefs: columnRenderF,
+      columnDefs: columnRenderF
     });
     runFields(dataSet);
   }
@@ -447,9 +403,7 @@
       $("#foods").val(null);
       $("#comment").val(null);
     } else {
-      alert(
-        "Sorry, your browser does not support saving data. Use the export feature instead."
-      );
+      alert("Sorry, your browser does not support saving data. Use the export feature instead.");
     }
   }
   function reset() {
@@ -530,10 +484,7 @@
     } catch {
       alert("This data is not compatible.");
     }
-    if (
-      newData.length &&
-      confirm("Are you sure you want to replace all data?")
-    ) {
+    if (newData.length && confirm("Are you sure you want to replace all data?")) {
       dataLoad = newData;
       save();
       $(".hideme").fadeOut();

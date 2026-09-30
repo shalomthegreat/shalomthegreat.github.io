@@ -1,23 +1,18 @@
+<!--written by Digital Crayon || https://shalomr.dev -->
 <html>
   <head>
     <meta name="title" content="Recipe Cleaner - by Shalom The Great" />
     <meta
       name="description"
-      content="Save your favorite online recipe, WITH your custom edits. Format recipes for printing, without the ads and the clutter. Save recipes to your computer for offline viewing."
-    />
+      content="Save your favorite online recipe, WITH your custom edits. Format recipes for printing, without the ads and the clutter. Save recipes to your computer for offline viewing." />
     <meta
       name="keywords"
-      content="Recipe Maker, Recipe Printer, Download Recipe, Recipe Cleaner, Format Recipe, Recipe Formatter, Print Your Own Recipe, Recipe Editor"
-    />
+      content="Recipe Maker, Recipe Printer, Download Recipe, Recipe Cleaner, Format Recipe, Recipe Formatter, Print Your Own Recipe, Recipe Editor" />
     <meta name="author" content="Shalom Rasmussen" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.css" />
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css?family=Martel+Sans|Molle:400i|Raleway|Dancing+Script|Roboto&display=swap"
-    />
+      href="https://fonts.googleapis.com/css?family=Martel+Sans|Molle:400i|Raleway|Dancing+Script|Roboto&display=swap" />
     <style>
       /* v1.4 */
       html {
@@ -151,12 +146,17 @@
     <div class="container">
       <div class="row">
         <span id="actions" style="float: right">
-          <button id="save" onclick="presave();">Save</button>
+          <button id="save" onclick="presave()">Save</button>
           <span id="dload" style="display: none">
             <input type="text" id="dname" placeholder="File Name" />
             <button onclick="saveme($('#dname').val())">Download</button>
           </span>
-          <button id="print" onclick="window.print();return false;">
+          <button
+            id="print"
+            onclick="
+              window.print();
+              return false;
+            ">
             Print
           </button>
         </span>
@@ -207,9 +207,7 @@
         <div class="seven columns">
           <h5>
             Instructions
-            <span id="noteb" class="modify" onclick="addNote()"
-              >+ add note</span
-            >
+            <span id="noteb" class="modify" onclick="addNote()">+ add note</span>
           </h5>
           <div class="set">
             <ol class="text" id="instructions">
@@ -224,10 +222,7 @@
             <textarea class="field">NOTE: </textarea>
           </div>
           <div class="set" style="font-size: small; color: #999">
-            <div class="text" id="credits">
-              Credits -
-              https://www.kingarthurflour.com/recipes/banana-bread-recipe
-            </div>
+            <div class="text" id="credits">Credits - https://www.kingarthurflour.com/recipes/banana-bread-recipe</div>
             <textarea class="field">Credits - </textarea>
           </div>
         </div>
@@ -257,8 +252,7 @@
         });
       $("body")
         .on("click", ".edit", function () {
-          if ($(this).find("textarea").length < 1)
-            $(this).wrapInner("<textarea/>").find("textarea").focus();
+          if ($(this).find("textarea").length < 1) $(this).wrapInner("<textarea/>").find("textarea").focus();
           else return;
         })
         .delegate(".edit textarea", "blur", function () {
@@ -270,13 +264,8 @@
         $("#dname").val($("h3").text().replace(/\s/g, "")).focus();
       }
       function addSection() {
-        if (
-          $("#items .mtitle").length >= 4 &&
-          !confirm("Are you sure you want to add another section?")
-        )
-          return;
-        $("#items")
-          .append(`<p class="mtitle edit" style="margin-top:25px;">Seasonings</p>
+        if ($("#items .mtitle").length >= 4 && !confirm("Are you sure you want to add another section?")) return;
+        $("#items").append(`<p class="mtitle edit" style="margin-top:25px;">Seasonings</p>
                     <div class="set">
                         <div class="text"></div>
                         <textarea class="field">1t Salt</textarea>
