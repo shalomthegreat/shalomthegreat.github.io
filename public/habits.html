@@ -1,4 +1,4 @@
-<!--written by Digital Crayon || https://shalomr.dev || v2.1 -->
+<!--written by Digital Crayon || https://shalomr.dev || v2.2 -->
 <!doctype html>
 <html lang="en">
   <head>
@@ -447,6 +447,85 @@
         font-family: inherit;
         cursor: pointer;
         margin-top: 4px;
+      }
+      .day-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 6px;
+      }
+      .dg-cell {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1px;
+        padding: 9px 0 8px;
+        min-height: 78px;
+        border-radius: 10px;
+        border: 1px solid var(--line);
+        background: var(--card);
+        font-size: 12px;
+        color: var(--sub);
+        text-align: center;
+      }
+      .dg-cell .dn {
+        font-weight: 700;
+        font-size: 17px;
+        line-height: 1.2;
+        color: var(--ink);
+      }
+      .dg-cell .df {
+        font-weight: 600;
+        font-size: 12px;
+        color: var(--ink);
+      }
+      .dg-cell.full {
+        border-color: var(--accent);
+        background: var(--accent-soft);
+        color: var(--accent);
+      }
+      .dg-cell.full .dn,
+      .dg-cell.full .df {
+        color: var(--accent);
+      }
+      .dg-cell.today {
+        box-shadow: 0 0 0 1px var(--accent) inset;
+      }
+      .dg-cell.future {
+        opacity: 0.55;
+      }
+      .dg-cell.future .dn,
+      .dg-cell.future .df {
+        color: var(--sub);
+        font-weight: 500;
+      }
+      .dg-star {
+        border-style: dashed;
+        background: transparent;
+      }
+      .dg-star .stamp {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 46px;
+        height: 46px;
+        border-radius: 50%;
+        font-size: 26px;
+        line-height: 1;
+        color: var(--line);
+        border: 2px dashed var(--line);
+      }
+      .dg-star.earned {
+        border-style: solid;
+        border-color: var(--grow);
+        background: color-mix(in srgb, var(--grow) 14%, var(--card));
+      }
+      .dg-star.earned .stamp {
+        color: var(--grow);
+        border: 3px double var(--grow);
+        transform: rotate(-10deg);
+        font-size: 28px;
+        text-shadow: 0 1px 0 color-mix(in srgb, var(--grow) 40%, transparent);
       }
       .week-detail {
         background: var(--card);
@@ -1770,14 +1849,7 @@
             })
           );
         const res = state.blocks.map((b) => at(b, wk)).filter(Boolean);
-        if (res.filter((r) => r.stage === "building").length > 2)
-          main.append(
-            h("p", {
-              class: "hint",
-              style: "margin-top:8px",
-              text: "3+ habits in Building at once splits your focus. Consider promoting one to Established or waiting until next week."
-            })
-          );
+        const tooManyBuilding = res.filter((r) => r.stage === "building").length > 2;
         state.cats.forEach((c) => {
           const zone = h("div", { class: "zone" });
           zone.dataset.cat = c.id;
@@ -1813,6 +1885,13 @@
               ? h("p", {
                   class: "sub",
                   text: "A block is anything you want to show up for each week. New blocks start in Building with a weekly target. Each block can run on specific days or a number of times per week."
+                })
+              : null,
+            edit && tooManyBuilding
+              ? h("p", {
+                  class: "hint",
+                  style: "margin:0 0 12px",
+                  text: "3+ habits in Building at once splits your focus. Consider promoting one to Established or waiting until next week."
                 })
               : null,
             edit ? h("button", { class: "main-btn", text: "+ Add block", onclick: addBlock }) : null
@@ -1954,14 +2033,41 @@
 
         main.append(h("div", { class: "section-title", text: "Established · day by day" }));
         const box = h("div", { class: "week-detail" });
-        w.perDay.forEach((x, i) =>
-          box.append(
-            h("div", { class: "week-detail-row" }, [
-              h("span", { class: "wd-day", text: DOW[i] + " " + x.d.getDate() }),
-              h("span", { class: "wd-frac", text: x.future ? "not yet" : x.p ? x.dd + " / " + x.p : "—" })
-            ])
+        const grid = h("div", { class: "day-grid" });
+        const tIso = todayISO();
+        w.perDay.forEach((x, i) => {
+          const full = !x.future && x.dd === x.p;
+          grid.append(
+            h(
+              "div",
+              {
+                class:
+                  "dg-cell" +
+                  (full ? " full" : "") +
+                  (x.future ? " future" : "") +
+                  (isoDate(x.d) === tIso ? " today" : "")
+              },
+              [
+                DOW[i][0],
+                h("span", { class: "dn", text: x.d.getDate() }),
+                h("span", { class: "df", text: x.future ? "–" : x.p ? x.dd + "/" + x.p : "—" })
+              ]
+            )
+          );
+        });
+        // Gold star: every day is in the past/today and every scheduled day was fully completed
+        const earned = w.perDay.every((x) => !x.future && x.dd === x.p) && w.perDay.some((x) => x.p > 0);
+        grid.append(
+          h(
+            "div",
+            {
+              class: "dg-cell dg-star" + (earned ? " earned" : ""),
+              title: earned ? "Perfect week!" : "Complete every day to earn a gold star"
+            },
+            [h("span", { class: "stamp", text: earned ? "★" : "☆" })]
           )
         );
+        box.append(grid);
         main.append(box);
 
         main.append(h("div", { class: "section-title", text: "Established · balance by category" }));
