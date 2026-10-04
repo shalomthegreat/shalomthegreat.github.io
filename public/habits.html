@@ -1,4 +1,4 @@
-<!--written by Digital Crayon || https://shalomr.dev || v1.0 -->
+<!--written by Digital Crayon || https://shalomr.dev || v2.0 -->
 <!doctype html>
 <html lang="en">
   <head>
@@ -215,10 +215,11 @@
         margin-top: 2px;
       }
       .block-check {
-        width: 26px;
-        height: 26px;
+        width: 30px;
+        height: 30px;
         border-radius: 50%;
-        border: 2px solid var(--line);
+        border: 1px solid var(--sub);
+        background: var(--bg);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -227,6 +228,10 @@
         font-size: 14px;
         color: transparent;
         transition: 0.15s;
+      }
+      .block-check:not(.done):not(.locked):hover {
+        border-color: var(--accent);
+        background: var(--accent-soft);
       }
       .block-check.done {
         background: var(--accent);
@@ -471,10 +476,23 @@
       .wd-frac {
         font-weight: 600;
       }
+      .week-detail-row.wd-bar {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 110px 3.5em;
+        gap: 10px;
+      }
+      .wd-bar .wd-day {
+        min-width: 0;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .wd-bar .wd-frac {
+        text-align: right;
+      }
       .mini {
         height: 6px;
-        flex: 1;
-        max-width: 110px;
+        width: 100%;
         border-radius: 4px;
         background: var(--line);
         overflow: hidden;
@@ -495,16 +513,14 @@
         align-items: center;
         justify-content: space-between;
         gap: 12px;
-        padding: 8px 18px;
-        background: var(--bg);
-        border-top: 1px solid var(--line);
+        margin-top: 12px;
       }
       .weeknav[hidden] {
         display: none;
       }
       .weeknav button {
-        width: 40px;
-        height: 40px;
+        width: 36px;
+        height: 36px;
         border-radius: 50%;
         border: 1px solid var(--line);
         background: var(--card);
@@ -734,6 +750,16 @@
           monospace;
         resize: none;
       }
+      .dlg input.nm {
+        width: 100%;
+        margin: 6px 0 14px;
+        padding: 10px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--bg);
+        color: var(--ink);
+        font-size: 16px;
+      }
       .dlg-b .primary {
         background: var(--accent);
         border-color: var(--accent);
@@ -771,10 +797,6 @@
           display: block;
           padding: 18px 24px 40px;
           min-height: 0;
-        }
-        .weeknav {
-          padding-left: 24px;
-          padding-right: 24px;
         }
         nav.tabs {
           position: static;
@@ -863,6 +885,23 @@
         opacity: 0;
         cursor: pointer;
       }
+      .setup-row.ro {
+        opacity: 0.7;
+      }
+      .setup-row.ro input,
+      .setup-row.ro .seg,
+      .setup-row.ro .wk-toggle,
+      .setup-row.ro .stepper button,
+      .setup-row.ro .grip,
+      .setup-row.ro .del-btn,
+      .setup-row.ro .emoji-btn {
+        pointer-events: none;
+      }
+      .block-check.locked {
+        pointer-events: none;
+        opacity: 0.55;
+        border: none;
+      }
     </style>
   </head>
   <body>
@@ -889,13 +928,13 @@
         </div>
       </div>
       <div class="days" id="dayChips"></div>
+      <div class="weeknav" id="weekbar" hidden></div>
     </header>
 
     <div class="layout">
       <section class="pane left"><main id="main"></main></section>
       <section class="pane right">
         <div id="weekMain"></div>
-        <div class="weeknav" id="weekbar" hidden></div>
       </section>
     </div>
 
@@ -1116,52 +1155,84 @@
           { id: "maintain", name: "Maintain", color: "#b0a07a" }
         ];
       }
-      function mk(id, name, emoji, cat, days) {
-        return { id, name, emoji, cat, stage: "established", days, weeklyTarget: 3, startedOn: todayISO() };
+      const K3 = "rhythm_app_v3";
+      const pd = (x) => new Date(x + "T00:00:00");
+      const wkKey = (d) => isoDate(startOfWeek(typeof d === "string" ? pd(d) : d));
+      const sch = (days) => ({ mode: "days", days });
+      const cnt = (n) => ({ mode: "count", perWeek: n });
+      function mk(id, name, emoji, cat, stage, schedule, from) {
+        return { id, name, emoji, versions: [{ from, cat, stage, schedule }] };
       }
       function fresh() {
+        const f = wkKey(todayISO());
         return {
+          meta: { schema: 3, startedOn: todayISO() },
           cats: defCats(),
           blocks: [
-            {
-              ...mk("b1790722665902", "Connect with a Friend", "☎️", "connect", WEEKDAYS),
-              stage: "building",
-              weeklyTarget: 3
-            },
-            { ...mk("b1790722660583", "Clean Home", "🧽", "maintain", ["sat", "sun"]), weeklyTarget: 2 },
-            mk("b4", "Walk", "🚶", "body", KEYS.slice()),
-            { ...mk("b1", "Study", "📚", "build", WEEKDAYS), stage: "building", weeklyTarget: 2 },
-            mk("b3", "Create", "🎨", "mind", ["tue", "thu", "sat"])
+            mk("b1790722665902", "Connect with a Friend", "☎️", "connect", "building", cnt(3), f),
+            mk("b1790722660583", "Clean Home", "🧽", "maintain", "established", sch(["sat", "sun"]), f),
+            mk("b4", "Walk", "🚶", "body", "established", sch(KEYS.slice()), f),
+            mk("b1", "Study", "📚", "build", "building", cnt(2), f),
+            mk("b3", "Create", "🎨", "mind", "established", sch(["tue", "thu", "sat"]), f)
           ],
           log: {}
         };
       }
-      function migrate(o) {
+      function migrate1(o) {
         const log = {};
-        Object.entries(o.log || {}).forEach(([k, v]) => {
-          log[k] = { done: v };
-        });
+        Object.entries(o.log || {}).forEach(([k, v]) => (log[k] = { done: v }));
         return {
           cats: defCats(),
-          blocks: (o.blocks || []).map((b) => {
-            const nb = mk(
+          log,
+          blocks: (o.blocks || []).map((b) => ({
+            id: b.id,
+            name: b.name,
+            emoji: b.emoji,
+            cat: /walk|sleep|food|gym|run|move/i.test(b.name) ? "body" : "build",
+            stage: "established",
+            days: b.days || [],
+            weeklyTarget: 3,
+            startedOn: todayISO()
+          }))
+        };
+      }
+      /* v2 -> v3: one version per block, from the first week of use; old frozen "planned" lists are dropped */
+      function migrate2(o) {
+        const log = {};
+        Object.entries(o.log || {}).forEach(([k, v]) => (log[k] = { done: v.done || {} }));
+        const start = wkKey(
+          Object.keys(log)
+            .concat((o.blocks || []).map((b) => b.startedOn))
+            .filter(Boolean)
+            .sort()[0] || todayISO()
+        );
+        return {
+          meta: { schema: 3, startedOn: start },
+          cats: o.cats || defCats(),
+          blocks: (o.blocks || []).map((b) =>
+            mk(
               b.id,
               b.name,
               b.emoji,
-              /walk|sleep|food|gym|run|move/i.test(b.name) ? "body" : "build",
-              b.days || []
-            );
-            return nb;
-          }),
+              b.cat,
+              b.stage,
+              b.stage === "building"
+                ? cnt(b.weeklyTarget || 2)
+                : sch(b.days && b.days.length ? b.days : WEEKDAYS.slice()),
+              wkKey(start)
+            )
+          ),
           log
         };
       }
       function loadState() {
         try {
-          const r = localStorage.getItem(K2);
+          const r = localStorage.getItem(K3);
           if (r) return JSON.parse(r);
-          const old = localStorage.getItem(K1);
-          if (old) return migrate(JSON.parse(old));
+          const v2 = localStorage.getItem(K2);
+          if (v2) return migrate2(JSON.parse(v2));
+          const v1 = localStorage.getItem(K1);
+          if (v1) return migrate2(migrate1(JSON.parse(v1)));
         } catch (e) {
           console.warn("storage read failed", e);
         }
@@ -1169,7 +1240,7 @@
       }
       function saveState() {
         try {
-          localStorage.setItem(K2, JSON.stringify(state));
+          localStorage.setItem(K3, JSON.stringify(state));
         } catch (e) {
           console.warn("storage write failed", e);
         }
@@ -1199,26 +1270,40 @@
       }
       const fmtDateLabel = (d) => d.toLocaleDateString(undefined, { weekday: "long", month: "short", day: "numeric" });
 
-      /* ---------- history: freeze what was planned on past days ---------- */
-      function plannedIds(d) {
-        const L = state.log[isoDate(d)];
-        if (L && L.planned) return L.planned;
-        const k = dowKey(d);
-        return state.blocks.filter((b) => b.stage === "established" && b.days.includes(k)).map((b) => b.id);
+      /* ---------- plan history: blocks have dated versions; a week uses the latest version on or before its Monday ---------- */
+      const thisWk = () => wkKey(new Date());
+      const nextWk = () => wkKey(new Date(Date.now() + 7 * 864e5));
+      const inSetup = () => thisWk() === wkKey(state.meta.startedOn);
+      const minEditWk = () => (inSetup() ? thisWk() : nextWk());
+      /* the week edits land in: the week being viewed on the Blocks tab (any future week), otherwise the earliest editable week */
+      const editWk = () => {
+        const v = wkKey(viewDate);
+        return activeTab === "blocks" && v > minEditWk() ? v : minEditWk();
+      };
+      function specAt(b, wk) {
+        if (b.retiredFrom && b.retiredFrom <= wk) return null;
+        let s = null;
+        b.versions.forEach((v) => {
+          if (v.from <= wk && (!s || v.from >= s.from)) s = v;
+        });
+        return s;
       }
-      function snapPast() {
-        const now = new Date();
-        now.setHours(0, 0, 0, 0);
-        for (let i = 1; i <= 28; i++) {
-          const d = new Date(now);
-          d.setDate(now.getDate() - i);
-          const iso = isoDate(d);
-          const L = state.log[iso] || (state.log[iso] = { done: {} });
-          if (!L.planned) L.planned = plannedIds(d);
+      const at = (b, wk) => {
+        const s = specAt(b, wk);
+        return s && { ...b, ...s };
+      };
+      function editSpec(b, patch) {
+        const wk = editWk();
+        let v = b.versions.find((x) => x.from === wk);
+        if (!v) {
+          v = JSON.parse(JSON.stringify(specAt(b, wk) || b.versions[0]));
+          v.from = wk;
+          b.versions.push(v);
         }
+        Object.assign(v, patch);
+        b.versions.sort((x, y) => (x.from < y.from ? -1 : 1));
       }
       function mut(fn) {
-        snapPast();
         fn();
         saveState();
         renderAll();
@@ -1226,58 +1311,63 @@
 
       /* ---------- stats ---------- */
       function weekStats(ref) {
-        const t = new Date();
+        const wk = wkKey(ref),
+          t = new Date();
         t.setHours(0, 0, 0, 0);
-        const dates = weekDates(ref);
-        let p = 0,
-          dn = 0;
-        const cats = {},
-          perDay = [];
-        dates.forEach((d) => {
-          if (d > t) {
-            perDay.push({ d, future: true });
-            return;
+        const dates = weekDates(ref),
+          start = state.meta.startedOn;
+        const elig = dates.filter((d) => isoDate(d) >= start),
+          past = elig.filter((d) => d <= t);
+        const ok = (d, id) => !!(state.log[isoDate(d)] || { done: {} }).done[id];
+        const o = { p: 0, dn: 0, cats: {}, byId: {}, items: [], counts: [] };
+        const perDay = dates.map((d) => (d > t ? { d, future: true } : { d, p: 0, dd: 0 }));
+        let bt = 0,
+          bn = 0;
+        state.blocks.forEach((raw) => {
+          const b = at(raw, wk);
+          if (!b) return;
+          const s = b.schedule;
+          let due, n;
+          if (s.mode === "count") {
+            due = Math.min(s.perWeek, elig.length);
+            n = Math.min(due, past.filter((d) => ok(d, b.id)).length);
+          } else {
+            const ds = past.filter((d) => s.days.includes(dowKey(d)));
+            due = ds.length;
+            n = ds.filter((d) => ok(d, b.id)).length;
+            if (b.stage === "established")
+              ds.forEach((d) => {
+                const x = perDay[dates.indexOf(d)];
+                x.p++;
+                if (ok(d, b.id)) x.dd++;
+              });
           }
-          const L = state.log[isoDate(d)] || { done: {} };
-          let dp = 0,
-            dd = 0;
-          plannedIds(d).forEach((id) => {
-            const b = byId(id);
-            if (!b) return;
-            const ok = !!L.done[id];
-            dp++;
-            if (ok) dd++;
-            const c = cats[b.cat] || (cats[b.cat] = { p: 0, d: 0 });
-            c.p++;
-            if (ok) c.d++;
-          });
-          p += dp;
-          dn += dd;
-          perDay.push({ d, p: dp, dd });
+          o.byId[b.id] = { n, due };
+          if (b.stage === "building") {
+            o.items.push({ b, n, due });
+            bt += due;
+            bn += n;
+          } else {
+            if (s.mode === "count") o.counts.push({ b, n, due });
+            o.p += due;
+            o.dn += n;
+            const c = o.cats[b.cat] || (o.cats[b.cat] = { p: 0, d: 0 });
+            c.p += due;
+            c.d += n;
+          }
         });
-        const items = state.blocks
-          .filter((b) => b.stage === "building")
-          .map((b) => ({
-            b,
-            n: dates.filter((d) => {
-              const L = state.log[isoDate(d)];
-              return L && L.done[b.id];
-            }).length
-          }));
-        const tt = items.reduce((s, i) => s + i.b.weeklyTarget, 0);
-        const tn = items.reduce((s, i) => s + Math.min(i.n, i.b.weeklyTarget), 0);
         return {
-          p,
-          dn,
-          pct: p ? Math.round((100 * dn) / p) : 0,
-          cats,
+          ...o,
           perDay,
-          items,
-          bpct: tt ? Math.round((100 * tn) / tt) : null
+          pct: o.p ? Math.round((100 * o.dn) / o.p) : 0,
+          bpct: bt ? Math.round((100 * bn) / bt) : null
         };
       }
-      function weeksIn(b) {
-        return Math.floor((new Date(todayISO()) - new Date(b.startedOn)) / (7 * 864e5)) + 1;
+      function weeksIn(b, wk) {
+        let from = null;
+        const vs = b.versions.filter((v) => v.from <= wk);
+        for (let i = vs.length - 1; i >= 0 && vs[i].stage === "building"; i--) from = vs[i].from;
+        return from ? Math.round((pd(wk) - pd(from)) / (7 * 864e5)) + 1 : 0;
       }
       function g1(s) {
         s = s.trim();
@@ -1287,16 +1377,14 @@
 
       /* ---------- render ---------- */
       function renderHeader() {
-        const wd = weekDates(viewDate),
-          sd = (d) => d.toLocaleDateString(undefined, { month: "short", day: "numeric" });
-        $("#dateLabel").textContent =
-          activeTab === "week" ? `Week of ${sd(wd[0])} – ${sd(wd[6])}` : fmtDateLabel(viewDate);
+        $("#dateLabel").textContent = fmtDateLabel(new Date());
         const w = weekStats(viewDate);
         $("#pctE").textContent = w.pct + "%";
         $("#barE").style.width = w.pct + "%";
         $("#pctB").textContent = w.bpct == null ? "—" : w.bpct + "%";
         $("#barB").style.width = (w.bpct || 0) + "%";
         const chips = $("#dayChips");
+        chips.style.display = desk() || activeTab === "today" ? "" : "none";
         chips.innerHTML = "";
         const tIso = todayISO(),
           vIso = isoDate(viewDate);
@@ -1328,7 +1416,7 @@
           h("div", { class: "block-emoji", text: b.emoji }),
           h("div", { class: "block-name" }, [b.name, sub ? h("div", { class: "sub", text: sub }) : null]),
           h("div", {
-            class: "block-check" + (done ? " done" : ""),
+            class: "block-check" + (done ? " done" : "") + (wkKey(iso) < thisWk() ? " locked" : ""),
             text: "✓",
             onclick: () => {
               const l = state.log[iso] || (state.log[iso] = { done: {} });
@@ -1360,10 +1448,14 @@
       function renderToday() {
         const main = $("#main");
         main.innerHTML = "";
-        const iso = isoDate(viewDate);
-        const est = plannedIds(viewDate).map(byId).filter(Boolean);
-        const bld = state.blocks.filter((b) => b.stage === "building");
-        if (!est.length && !bld.length) {
+        const iso = isoDate(viewDate),
+          wk = wkKey(viewDate),
+          k = dowKey(viewDate);
+        const w = weekStats(viewDate);
+        const due = state.blocks
+          .map((b) => at(b, wk))
+          .filter((b) => b && (b.schedule.mode === "count" || b.schedule.days.includes(k)));
+        if (!due.length) {
           main.append(
             h("div", {
               class: "empty",
@@ -1373,32 +1465,67 @@
           backBar();
           return;
         }
+        const prog = (b) => {
+          const x = w.byId[b.id];
+          return b.schedule.mode === "count" && x ? `${x.n}/${x.due} this week` : "";
+        };
         state.cats.forEach((c) => {
-          const items = est.filter((b) => b.cat === c.id);
+          const items = due.filter((b) => b.stage === "established" && b.cat === c.id);
           if (!items.length) return;
           main.append(
             h("div", { class: "section-title" }, [h("span", { class: "dot", style: "background:" + c.color }), c.name])
           );
-          items.forEach((b) => main.append(card(b, iso)));
+          items.forEach((b) => main.append(card(b, iso, prog(b))));
         });
+        const bld = due.filter((b) => b.stage === "building");
         if (bld.length) {
-          const w = weekStats(viewDate);
           main.append(h("div", { class: "section-title", style: "color:var(--grow)" }, "Building"));
           bld.forEach((b) => {
-            const n = (w.items.find((i) => i.b.id === b.id) || { n: 0 }).n;
-            const k = weeksIn(b);
+            const n = weeksIn(b, wk),
+              p = prog(b);
             main.append(
-              card(
-                b,
-                iso,
-                `${n}/${b.weeklyTarget} this week · week ${k}` + (k > 4 ? " · ready to promote?" : ""),
-                "bld-card"
-              )
+              card(b, iso, (p ? p + " · " : "") + `week ${n}` + (n > 4 ? " · ready to promote?" : ""), "bld-card")
             );
           });
         }
         backBar();
       }
+
+      function editText(title, cur, apply) {
+        if (document.querySelector(".dlg input.nm")) return;
+        const close = () => ov.remove();
+        const save = () => {
+          const v = inp.value.trim();
+          close();
+          if (v && v !== cur) apply(v);
+        };
+        const inp = h("input", {
+          type: "text",
+          class: "nm",
+          value: cur,
+          onkeydown: (e) => {
+            if (e.key === "Enter") save();
+            if (e.key === "Escape") close();
+          }
+        });
+        const ov = h(
+          "div",
+          { class: "ov", onclick: (e) => e.target === ov && close() },
+          h("div", { class: "dlg", role: "dialog" }, [
+            h("div", { class: "dlg-t", text: title }),
+            inp,
+            h("div", { class: "dlg-b" }, [
+              h("button", { text: "Cancel", onclick: close }),
+              h("button", { class: "primary", text: "Save", onclick: save })
+            ])
+          ])
+        );
+        document.body.append(ov);
+        inp.focus();
+        inp.select();
+      }
+
+      const editName = (b) => editText("Block name", b.name, (v) => mut(() => (b.name = v)));
 
       function confirmRemove(b) {
         const close = () => ov.remove();
@@ -1412,7 +1539,7 @@
           },
           h("div", { class: "dlg", role: "dialog" }, [
             h("div", { class: "dlg-t", text: `Remove “${b.name}”?` }),
-            h("p", { class: "sub", text: "It will also disappear from past weeks’ totals. This can’t be undone." }),
+            h("p", { class: "sub", text: "Remove from your plan. Does not affect stats from past weeks." }),
             h("div", { class: "dlg-b" }, [
               h("button", { text: "Cancel", onclick: close }),
               h("button", {
@@ -1421,7 +1548,12 @@
                 onclick: () => {
                   close();
                   mut(() => {
-                    state.blocks = state.blocks.filter((x) => x.id !== b.id);
+                    const wk = editWk();
+                    if (b.versions[0].from >= wk) state.blocks = state.blocks.filter((x) => x.id !== b.id);
+                    else {
+                      b.retiredFrom = wk;
+                      b.versions = b.versions.filter((v) => v.from < wk);
+                    }
                   });
                 }
               })
@@ -1496,7 +1628,9 @@
           while (n === row) n = n.nextElementSibling;
           const cat = ph.closest(".zone").dataset.cat;
           state.blocks = state.blocks.filter((x) => x !== b);
-          b.cat = cat;
+          const wk = editWk(),
+            catOf = (x) => (specAt(x, wk) || {}).cat;
+          if (catOf(b) !== cat) editSpec(b, { cat });
           if (n) {
             state.blocks.splice(
               state.blocks.findIndex((x) => x.id === n.dataset.id),
@@ -1506,7 +1640,7 @@
           } else {
             let last = -1;
             state.blocks.forEach((x, i) => {
-              if (x.cat === cat) last = i;
+              if (catOf(x) === cat) last = i;
             });
             state.blocks.splice(last + 1, 0, b);
           }
@@ -1519,36 +1653,26 @@
         requestAnimationFrame(loop);
       }
 
-      function blockRow(b) {
-        const row = h("div", { class: "setup-row" });
+      function blockRow(r, edit, wk) {
+        const b = byId(r.id),
+          s = r.schedule;
+        const row = h("div", { class: "setup-row" + (edit ? "" : " ro") });
         row.dataset.id = b.id;
-        const setStage = (s) =>
-          mut(() => {
-            if (b.stage === s) return;
-            b.stage = s;
-            if (s === "building") b.startedOn = todayISO();
-            else if (!b.days.length) b.days = WEEKDAYS.slice();
-          });
-        const seg = h("div", { class: "seg" }, [
-          h("button", {
-            class: b.stage === "building" ? "on g" : "",
-            text: "Building",
-            onclick: () => setStage("building")
-          }),
-          h("button", {
-            class: b.stage === "established" ? "on n" : "",
-            text: "Established",
-            onclick: () => setStage("established")
-          })
-        ]);
+        const set = (p) => mut(() => editSpec(b, p));
+        const seg = (opts) =>
+          h(
+            "div",
+            { class: "seg" },
+            opts.map(([t, on, cls, fn]) => h("button", { class: on ? "on " + cls : "", text: t, onclick: fn }))
+          );
         const grip = h("div", { class: "grip", text: "⠿", title: "Drag to reorder or move to another category" });
-        grip.onpointerdown = (e) => startDrag(e, row, b);
+        if (edit) grip.onpointerdown = (e) => startDrag(e, row, b);
         row.append(
           h("div", { class: "setup-row-top" }, [
             grip,
             h("button", {
               class: "emoji-btn",
-              text: b.emoji,
+              text: r.emoji,
               onclick: () => {
                 pickId = pickId === b.id ? null : b.id;
                 renderAll();
@@ -1556,18 +1680,32 @@
             }),
             h("input", {
               type: "text",
-              value: b.name,
+              value: r.name,
+              readOnly: !edit,
+              onfocus: (e) => {
+                if (edit && !desk()) {
+                  e.target.blur();
+                  editName(b);
+                }
+              },
               oninput: (e) => {
                 b.name = e.target.value;
                 saveState();
               }
             }),
-            seg,
+            seg([
+              ["Building", r.stage === "building", "g", () => r.stage !== "building" && set({ stage: "building" })],
+              [
+                "Established",
+                r.stage === "established",
+                "n",
+                () => r.stage !== "established" && set({ stage: "established" })
+              ]
+            ]),
             h("button", { class: "del-btn", text: "✕", onclick: () => confirmRemove(b) })
           ])
         );
-
-        if (pickId === b.id) {
+        if (pickId === b.id && edit) {
           const setE = (em) => {
             if (!em) return;
             b.emoji = em;
@@ -1590,12 +1728,23 @@
             )
           );
         }
-
-        if (b.stage === "building") {
-          const step = (n) =>
-            mut(() => {
-              b.weeklyTarget = Math.max(1, Math.min(7, b.weeklyTarget + n));
-            });
+        row.append(
+          h(
+            "div",
+            { class: "meta" },
+            seg([
+              [
+                "Specific days",
+                s.mode === "days",
+                "n",
+                () => s.mode !== "days" && set({ schedule: sch(WEEKDAYS.slice()) })
+              ],
+              ["× per week", s.mode === "count", "n", () => s.mode !== "count" && set({ schedule: cnt(3) })]
+            ])
+          )
+        );
+        if (s.mode === "count") {
+          const step = (n) => set({ schedule: cnt(Math.max(1, Math.min(7, s.perWeek + n))) });
           row.append(
             h(
               "div",
@@ -1603,7 +1752,7 @@
               h("div", { class: "stepper" }, [
                 "Target",
                 h("button", { text: "−", onclick: () => step(-1) }),
-                h("b", { text: b.weeklyTarget + "× / week", style: "color:var(--ink)" }),
+                h("b", { text: s.perWeek + "× / week", style: "color:var(--ink)" }),
                 h("button", { text: "+", onclick: () => step(1) })
               ])
             )
@@ -1613,39 +1762,61 @@
           KEYS.forEach((dk, i) =>
             tr.append(
               h("div", {
-                class: "wk-toggle" + (b.days.includes(dk) ? " on" : ""),
+                class: "wk-toggle" + (s.days.includes(dk) ? " on" : ""),
                 text: DOW[i][0],
                 onclick: () =>
-                  mut(() => {
-                    b.days = b.days.includes(dk) ? b.days.filter((x) => x !== dk) : b.days.concat(dk);
-                  })
+                  set({ schedule: sch(s.days.includes(dk) ? s.days.filter((x) => x !== dk) : s.days.concat(dk)) })
               })
             )
           );
           row.append(tr);
         }
+        if (edit && !inSetup() && b.versions.some((v) => v.from === wk))
+          row.append(
+            h("div", {
+              class: "sub",
+              text: "Starts Monday " + pd(wk).toLocaleDateString(undefined, { month: "short", day: "numeric" })
+            })
+          );
         return row;
       }
 
       function renderBlocks() {
         const main = $("#main");
         main.innerHTML = "";
+        const wk = wkKey(viewDate),
+          edit = wk >= minEditWk();
+        const f = (x) => pd(x).toLocaleDateString(undefined, { month: "short", day: "numeric" });
         main.append(
-          h("div", {
-            class: "sub",
-            style: "margin-bottom:2px",
-            text: "Drag ⠿ to reorder blocks or move them between categories."
+          h("p", {
+            class: "hint",
+            style: "margin:0 0 8px",
+            text: edit
+              ? inSetup() && wk === thisWk()
+                ? "Setup week: changes apply right away."
+                : `Changes you make here start Monday ${f(wk)} and carry on from there, until a later week changes them.`
+              : wk < thisWk()
+                ? `The plan in effect the week of ${f(wk)}. Past weeks are read-only.`
+                : "This week’s plan is locked. Use › to plan ahead."
           })
         );
-        if (state.blocks.filter((b) => b.stage === "building").length > 2)
+        if (edit)
+          main.append(
+            h("div", {
+              class: "sub",
+              style: "margin-bottom:2px",
+              text: "Drag ⠿ to reorder blocks or move them between categories."
+            })
+          );
+        const res = state.blocks.map((b) => at(b, wk)).filter(Boolean);
+        if (res.filter((r) => r.stage === "building").length > 2)
           main.append(
             h("p", {
               class: "hint",
               style: "margin-top:8px",
-              text: "3+ habits in Building at once splits your focus. Consider pausing one."
+              text: "3+ habits in Building at once splits your focus. Consider promoting one to Established or waiting until next week."
             })
           );
-
         state.cats.forEach((c) => {
           const zone = h("div", { class: "zone" });
           zone.dataset.cat = c.id;
@@ -1656,6 +1827,12 @@
                 type: "text",
                 class: "cat-input",
                 value: c.name,
+                onfocus: (e) => {
+                  if (!desk()) {
+                    e.target.blur();
+                    editText("Category name", c.name, (v) => mut(() => (c.name = v)));
+                  }
+                },
                 oninput: (e) => {
                   c.name = e.target.value;
                   saveState();
@@ -1664,20 +1841,21 @@
             ])
           );
           const list = h("div", { class: "list" });
-          state.blocks.filter((b) => b.cat === c.id).forEach((b) => list.append(blockRow(b)));
+          res.filter((r) => r.cat === c.id).forEach((r) => list.append(blockRow(r, edit, wk)));
           zone.append(list);
           main.append(zone);
         });
-
         main.append(
           h("div", { class: "add-section" }, [
-            h("div", { class: "add-title", text: "Add a block" }),
-            h("p", {
-              class: "sub",
-              text: "A block is anything you want to show up for each week. New blocks start in Building with a weekly target and land under Build; drag one wherever it belongs. Once it sticks, switch it to Established and pick its days."
-            }),
-            h("button", { class: "main-btn", text: "+ Add block", onclick: addBlock }),
-            h("button", { class: "link-btn", text: "Export setup", onclick: showExport })
+            edit ? h("div", { class: "add-title", text: "Add a block" }) : null,
+            edit
+              ? h("p", {
+                  class: "sub",
+                  text: "A block is anything you want to show up for each week. New blocks start in Building with a weekly target. Each block can run on specific days or a number of times per week."
+                })
+              : null,
+            edit ? h("button", { class: "main-btn", text: "+ Add block", onclick: addBlock }) : null,
+            h("button", { class: "link-btn", text: "Export all data", onclick: showExport })
           ])
         );
       }
@@ -1689,105 +1867,62 @@
             id,
             name: "New habit",
             emoji: "🌱",
-            cat: "build",
-            stage: "building",
-            days: WEEKDAYS.slice(),
-            weeklyTarget: 2,
-            startedOn: todayISO()
+            versions: [{ from: editWk(), cat: "build", stage: "building", schedule: cnt(2) }]
           });
         });
         const r = document.querySelector(`.setup-row[data-id="${id}"]`);
         if (r) {
           r.scrollIntoView({ block: "center" });
-          const i = r.querySelector("input[type=text]");
-          i.focus();
-          i.select();
+          if (desk()) {
+            const i = r.querySelector("input[type=text]");
+            i.focus();
+            i.select();
+          } else editName(byId(id));
         }
       }
 
       function showExport() {
-        const txt = JSON.stringify({
-          cats: state.cats,
-          blocks: state.blocks.map(({ id, name, emoji, cat, stage, days, weeklyTarget }) => ({
-            id,
-            name,
-            emoji,
-            cat,
-            stage,
-            days,
-            weeklyTarget
-          }))
+        const blob = new Blob([JSON.stringify({ app: "rhythm", exportedOn: todayISO(), ...state }, null, 2)], {
+          type: "application/json"
         });
-        const close = () => ov.remove();
-        const ta = h("textarea", { readOnly: true, value: txt, onfocus: (e) => e.target.select() });
-        const copyBtn = h("button", {
-          class: "primary",
-          text: "Copy",
-          onclick: async () => {
-            ta.focus();
-            ta.select();
-            ta.setSelectionRange(0, txt.length);
-            let ok = false;
-            try {
-              if (navigator.clipboard && window.isSecureContext) {
-                await navigator.clipboard.writeText(txt);
-                ok = true;
-              }
-            } catch (err) {}
-            if (!ok) {
-              try {
-                ok = document.execCommand("copy");
-              } catch (err) {}
-            }
-            copyBtn.textContent = ok ? "Copied" : "Selected: copy manually";
-          }
-        });
-        const ov = h(
-          "div",
-          {
-            class: "ov",
-            onclick: (e) => {
-              if (e.target === ov) close();
-            }
-          },
-          h("div", { class: "dlg", role: "dialog" }, [
-            h("div", { class: "dlg-t", text: "Your setup" }),
-            h("p", {
-              class: "sub",
-              text: "Your categories and blocks, without any history. Copy this to back it up or to use it as the app’s starting setup."
-            }),
-            ta,
-            h("div", { class: "dlg-b" }, [h("button", { text: "Close", onclick: close }), copyBtn])
-          ])
-        );
-        document.body.append(ov);
+        const a = h("a", { href: URL.createObjectURL(blob), download: `rhythm-data-${todayISO()}.json` });
+        document.body.append(a);
+        a.click();
+        a.remove();
+        setTimeout(() => URL.revokeObjectURL(a.href), 1000);
       }
 
       function barRow(label, right, pct, color, dot) {
-        return h("div", { class: "week-detail-row" }, [
+        return h("div", { class: "week-detail-row wd-bar" }, [
           h("span", { class: "wd-day" }, [dot ? h("span", { class: "dot", style: "background:" + dot }) : null, label]),
           h("div", { class: "mini" }, h("i", { style: `width:${pct}%;background:${color}` })),
           h("span", { class: "wd-frac", text: right })
         ]);
       }
 
+      const weekLabel = (wk) => {
+        const n = Math.round((pd(wk) - pd(thisWk())) / (7 * 864e5));
+        return n === 0 ? "This week" : n === 1 ? "Next week" : `In ${n} weeks`;
+      };
+      const weekLimit = () =>
+        activeTab === "blocks" ? pd(thisWk()).getTime() + 52 * 7 * 864e5 : startOfWeek(new Date()).getTime();
       function shiftWeek(n) {
         const nd = new Date(viewDate);
         nd.setDate(nd.getDate() + 7 * n);
         const cur = startOfWeek(new Date()).getTime();
-        if (startOfWeek(nd).getTime() > cur) return;
+        if (startOfWeek(nd).getTime() > weekLimit()) return;
         viewDate = startOfWeek(nd).getTime() === cur ? new Date() : nd;
         renderAll();
       }
       function weekNav() {
         const ds = weekDates(viewDate),
           f = (d) => d.toLocaleDateString(undefined, { month: "short", day: "numeric" });
-        const isCur = startOfWeek(viewDate).getTime() >= startOfWeek(new Date()).getTime();
+        const isCur = startOfWeek(viewDate).getTime() >= weekLimit();
         return h("div", { class: "weeknav" }, [
           h("button", { text: "‹", ariaLabel: "Previous week", onclick: () => shiftWeek(-1) }),
           h("div", { class: "wk-label" }, [
             f(ds[0]) + " – " + f(ds[6]),
-            isCur ? h("div", { class: "sub", text: "This week" }) : null
+            wkKey(viewDate) >= thisWk() ? h("div", { class: "sub", text: weekLabel(wkKey(viewDate)) }) : null
           ]),
           h("button", { text: "›", ariaLabel: "Next week", disabled: isCur, onclick: () => shiftWeek(1) })
         ]);
@@ -1818,14 +1953,24 @@
         if (!cb.children.length) cb.append(h("div", { class: "sub", text: "Nothing counted yet this week." }));
         main.append(cb);
 
+        if (w.counts.length) {
+          main.append(h("div", { class: "section-title", text: "Established · weekly counts" }));
+          const wc = h("div", { class: "week-detail" });
+          w.counts.forEach(({ b, n, due }) =>
+            wc.append(
+              barRow(b.emoji + " " + b.name, n + " / " + due, due ? Math.round((100 * n) / due) : 0, "var(--ink)")
+            )
+          );
+          main.append(wc);
+        }
         main.append(h("div", { class: "section-title", style: "color:var(--grow)", text: "Building · this week" }));
         const bb = h("div", { class: "week-detail" });
-        w.items.forEach(({ b, n }) =>
+        w.items.forEach(({ b, n, due }) =>
           bb.append(
             barRow(
               b.emoji + " " + b.name,
-              n + " / " + b.weeklyTarget,
-              Math.min(100, Math.round((100 * n) / b.weeklyTarget)),
+              n + " / " + due,
+              due ? Math.min(100, Math.round((100 * n) / due)) : 0,
               "var(--grow)"
             )
           )
@@ -1848,7 +1993,7 @@
       }
       function renderBar() {
         const bar = $("#weekbar");
-        bar.hidden = !(desk() || activeTab === "week");
+        bar.hidden = !(desk() || activeTab !== "today");
         if (!bar.hidden) bar.replaceChildren(...weekNav().childNodes);
       }
 
@@ -1872,6 +2017,7 @@
             renderAll();
             return;
           }
+          if (btn.dataset.tab !== "blocks" && wkKey(viewDate) > thisWk()) viewDate = new Date();
           syncTab(btn.dataset.tab);
           renderAll();
         };
@@ -1882,7 +2028,6 @@
         renderAll();
       });
       placeNav();
-      snapPast();
       saveState();
       renderAll();
     </script>
