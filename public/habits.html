@@ -1,4 +1,4 @@
-<!--written by Digital Crayon || https://shalomr.dev || v2.0 -->
+<!--written by Digital Crayon || https://shalomr.dev || v2.1 -->
 <!doctype html>
 <html lang="en">
   <head>
@@ -724,6 +724,17 @@
       .main-btn:active {
         transform: translateY(1px);
       }
+      .data-row {
+        display: flex;
+        justify-content: space-between;
+        margin: 24px 4px 12px;
+      }
+      .data-row .link-btn {
+        display: inline-block;
+        margin: 0;
+        padding: 10px 6px;
+        opacity: 0.7;
+      }
       .link-btn {
         display: block;
         margin: 12px auto 0;
@@ -947,8 +958,6 @@
     <script>
       const DOW = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
       const KEYS = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"];
-      const K1 = "rhythm_app_v1",
-        K2 = "rhythm_app_v2";
       const WEEKDAYS = ["mon", "tue", "wed", "thu", "fri"];
       const EMOJIS = [
         "📚",
@@ -1178,61 +1187,10 @@
           log: {}
         };
       }
-      function migrate1(o) {
-        const log = {};
-        Object.entries(o.log || {}).forEach(([k, v]) => (log[k] = { done: v }));
-        return {
-          cats: defCats(),
-          log,
-          blocks: (o.blocks || []).map((b) => ({
-            id: b.id,
-            name: b.name,
-            emoji: b.emoji,
-            cat: /walk|sleep|food|gym|run|move/i.test(b.name) ? "body" : "build",
-            stage: "established",
-            days: b.days || [],
-            weeklyTarget: 3,
-            startedOn: todayISO()
-          }))
-        };
-      }
-      /* v2 -> v3: one version per block, from the first week of use; old frozen "planned" lists are dropped */
-      function migrate2(o) {
-        const log = {};
-        Object.entries(o.log || {}).forEach(([k, v]) => (log[k] = { done: v.done || {} }));
-        const start = wkKey(
-          Object.keys(log)
-            .concat((o.blocks || []).map((b) => b.startedOn))
-            .filter(Boolean)
-            .sort()[0] || todayISO()
-        );
-        return {
-          meta: { schema: 3, startedOn: start },
-          cats: o.cats || defCats(),
-          blocks: (o.blocks || []).map((b) =>
-            mk(
-              b.id,
-              b.name,
-              b.emoji,
-              b.cat,
-              b.stage,
-              b.stage === "building"
-                ? cnt(b.weeklyTarget || 2)
-                : sch(b.days && b.days.length ? b.days : WEEKDAYS.slice()),
-              wkKey(start)
-            )
-          ),
-          log
-        };
-      }
       function loadState() {
         try {
           const r = localStorage.getItem(K3);
           if (r) return JSON.parse(r);
-          const v2 = localStorage.getItem(K2);
-          if (v2) return migrate2(JSON.parse(v2));
-          const v1 = localStorage.getItem(K1);
-          if (v1) return migrate2(migrate1(JSON.parse(v1)));
         } catch (e) {
           console.warn("storage read failed", e);
         }
@@ -1327,10 +1285,11 @@
           const b = at(raw, wk);
           if (!b) return;
           const s = b.schedule;
-          let due, n;
+          let due, n, tot;
           if (s.mode === "count") {
             due = Math.min(s.perWeek, elig.length);
-            n = Math.min(due, past.filter((d) => ok(d, b.id)).length);
+            tot = past.filter((d) => ok(d, b.id)).length;
+            n = Math.min(due, tot);
           } else {
             const ds = past.filter((d) => s.days.includes(dowKey(d)));
             due = ds.length;
@@ -1342,13 +1301,14 @@
                 if (ok(d, b.id)) x.dd++;
               });
           }
-          o.byId[b.id] = { n, due };
+          if (tot == null) tot = n;
+          o.byId[b.id] = { n, due, raw: tot };
           if (b.stage === "building") {
-            o.items.push({ b, n, due });
+            o.items.push({ b, n, due, raw: tot });
             bt += due;
             bn += n;
           } else {
-            if (s.mode === "count") o.counts.push({ b, n, due });
+            if (s.mode === "count") o.counts.push({ b, n, due, raw: tot });
             o.p += due;
             o.dn += n;
             const c = o.cats[b.cat] || (o.cats[b.cat] = { p: 0, d: 0 });
@@ -1416,9 +1376,10 @@
           h("div", { class: "block-emoji", text: b.emoji }),
           h("div", { class: "block-name" }, [b.name, sub ? h("div", { class: "sub", text: sub }) : null]),
           h("div", {
-            class: "block-check" + (done ? " done" : "") + (wkKey(iso) < thisWk() ? " locked" : ""),
+            class: "block-check" + (done ? " done" : "") + (wkKey(iso) < thisWk() || iso > todayISO() ? " locked" : ""),
             text: "✓",
             onclick: () => {
+              if (wkKey(iso) < thisWk() || iso > todayISO()) return;
               const l = state.log[iso] || (state.log[iso] = { done: {} });
               l.done[b.id] = !l.done[b.id];
               saveState();
@@ -1467,7 +1428,7 @@
         }
         const prog = (b) => {
           const x = w.byId[b.id];
-          return b.schedule.mode === "count" && x ? `${x.n}/${x.due} this week` : "";
+          return b.schedule.mode === "count" && x ? `${x.raw}/${x.due} this week` : "";
         };
         state.cats.forEach((c) => {
           const items = due.filter((b) => b.stage === "established" && b.cat === c.id);
@@ -1854,8 +1815,13 @@
                   text: "A block is anything you want to show up for each week. New blocks start in Building with a weekly target. Each block can run on specific days or a number of times per week."
                 })
               : null,
-            edit ? h("button", { class: "main-btn", text: "+ Add block", onclick: addBlock }) : null,
-            h("button", { class: "link-btn", text: "Export all data", onclick: showExport })
+            edit ? h("button", { class: "main-btn", text: "+ Add block", onclick: addBlock }) : null
+          ])
+        );
+        main.append(
+          h("div", { class: "data-row" }, [
+            h("button", { class: "link-btn", text: "Import data", onclick: importData }),
+            h("button", { class: "link-btn", text: "Export data", onclick: showExport })
           ])
         );
       }
@@ -1879,6 +1845,60 @@
             i.select();
           } else editName(byId(id));
         }
+      }
+
+      function importData() {
+        const inp = h("input", { type: "file", accept: "application/json,.json", style: "display:none" });
+        inp.onchange = async () => {
+          const f = inp.files[0];
+          inp.remove();
+          if (!f) return;
+          let o;
+          try {
+            o = JSON.parse(await f.text());
+            const ok =
+              o &&
+              o.meta &&
+              o.meta.startedOn &&
+              Array.isArray(o.cats) &&
+              Array.isArray(o.blocks) &&
+              o.log &&
+              typeof o.log === "object";
+            if (!ok || !o.blocks.every((b) => b.id && Array.isArray(b.versions) && b.versions.length)) throw 0;
+          } catch (e) {
+            alert("That file doesn’t look like a Rhythm export.");
+            return;
+          }
+          const close = () => ov.remove();
+          const ov = h(
+            "div",
+            { class: "ov", onclick: (e) => e.target === ov && close() },
+            h("div", { class: "dlg", role: "dialog" }, [
+              h("div", { class: "dlg-t", text: "Replace all your data?" }),
+              h("p", {
+                class: "sub",
+                text: `This swaps everything in the app for the contents of ${f.name}. Export first if you want a backup of what’s here now.`
+              }),
+              h("div", { class: "dlg-b" }, [
+                h("button", { text: "Cancel", onclick: close }),
+                h("button", {
+                  class: "primary",
+                  text: "Replace",
+                  onclick: () => {
+                    close();
+                    state = { meta: o.meta, cats: o.cats, blocks: o.blocks, log: o.log };
+                    viewDate = new Date();
+                    saveState();
+                    renderAll();
+                  }
+                })
+              ])
+            ])
+          );
+          document.body.append(ov);
+        };
+        document.body.append(inp);
+        inp.click();
       }
 
       function showExport() {
@@ -1956,21 +1976,26 @@
         if (w.counts.length) {
           main.append(h("div", { class: "section-title", text: "Established · weekly counts" }));
           const wc = h("div", { class: "week-detail" });
-          w.counts.forEach(({ b, n, due }) =>
+          w.counts.forEach(({ b, raw, due }) =>
             wc.append(
-              barRow(b.emoji + " " + b.name, n + " / " + due, due ? Math.round((100 * n) / due) : 0, "var(--ink)")
+              barRow(
+                b.emoji + " " + b.name,
+                raw + " / " + due,
+                due ? Math.min(100, Math.round((100 * raw) / due)) : 0,
+                "var(--ink)"
+              )
             )
           );
           main.append(wc);
         }
         main.append(h("div", { class: "section-title", style: "color:var(--grow)", text: "Building · this week" }));
         const bb = h("div", { class: "week-detail" });
-        w.items.forEach(({ b, n, due }) =>
+        w.items.forEach(({ b, raw, due }) =>
           bb.append(
             barRow(
               b.emoji + " " + b.name,
-              n + " / " + due,
-              due ? Math.min(100, Math.round((100 * n) / due)) : 0,
+              raw + " / " + due,
+              due ? Math.min(100, Math.round((100 * raw) / due)) : 0,
               "var(--grow)"
             )
           )
